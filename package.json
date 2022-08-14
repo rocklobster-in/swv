@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/takayukister/swv/issues"
   },
-  "homepage": "https://github.com/takayukister/swv#readme"
+  "homepage": "https://github.com/takayukister/swv#readme",
+  "devDependencies": {
+    "@takayukister/form-data-tree": "^1.0.0"
+  }
 }
