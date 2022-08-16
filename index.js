@@ -1,6 +1,7 @@
 import FormDataTree from '@takayukister/form-data-tree';
 
 import * as validators from './rules';
+import * as helpers from './helpers';
 import { ValidationError } from './error';
 
 const validate = ( schema, formData, options = {} ) => {
@@ -48,4 +49,6 @@ const validate = ( schema, formData, options = {} ) => {
 export { 
 	validators,
 	validate,
+	helpers,
+	ValidationError
 };
