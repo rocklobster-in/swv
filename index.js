@@ -1,4 +1,4 @@
-import FormDataTree from '@takayukister/form-data-tree';
+import FormDataTree from '@contactable/form-data-tree';
 
 import * as validators from './rules';
 import * as helpers from './helpers';
