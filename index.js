@@ -40,8 +40,14 @@ const validate = ( schema, formData, options = {} ) => {
 			}
 		}
 
-		return result.set( properties.field, {} );
+		return result;
 	}, new Map() );
+
+	for ( const key of formDataTree.keys() ) {
+		if ( ! result.has( key ) ) {
+			result.set( key, { validInputs: formDataTree.getAll( key ) } );
+		}
+	}
 
 	return result;
 };
