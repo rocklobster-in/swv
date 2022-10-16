@@ -79,6 +79,11 @@ A `mindate` rule verifies that the date value of the field specified by the `fie
 A `maxdate` rule verifies that the date value of the field specified by the `field` property is not later than the date specified by the `threshold` property.
 
 
+## minfilesize
+
+A `minfilesize` rule verifies that the size of the file object value of the field specified by the `field` property is not smaller than the size specified by the `threshold` property.
+
+
 ## maxfilesize
 
-A `maxfilesize` rule verifies that the size of the file object value of the field specified by the `field` property is equal to or smaller than the size specified by the `threshold` property.
+A `maxfilesize` rule verifies that the size of the file object value of the field specified by the `field` property is not larger than the size specified by the `threshold` property.
