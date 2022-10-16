@@ -1,8 +1,5 @@
 import { ValidationError } from '../error';
 
-/**
- * Verifies file values are not larger in file size than threshold.
- */
 export const maxfilesize = function ( formDataTree ) {
 	const values = formDataTree.getAll( this.field );
 

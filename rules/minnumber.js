@@ -1,8 +1,5 @@
 import { ValidationError } from '../error';
 
-/**
- * Verifies numerical values are not smaller than threshold.
- */
 export const minnumber = function ( formDataTree ) {
 	const values = formDataTree.getAll( this.field );
 

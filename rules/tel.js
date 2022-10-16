@@ -1,8 +1,5 @@
 import { ValidationError } from '../error';
 
-/**
- * Verifies telephone number fields have telephone number values.
- */
 export const tel = function ( formDataTree ) {
 	const values = formDataTree.getAll( this.field );
 

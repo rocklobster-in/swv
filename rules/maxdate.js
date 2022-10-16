@@ -1,8 +1,5 @@
 import { ValidationError } from '../error';
 
-/**
- * Verifies date values are not later than threshold.
- */
 export const maxdate = function ( formDataTree ) {
 	const values = formDataTree.getAll( this.field );
 

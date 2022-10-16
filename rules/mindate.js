@@ -1,8 +1,5 @@
 import { ValidationError } from '../error';
 
-/**
- * Verifies date values are not earlier than threshold.
- */
 export const mindate = function ( formDataTree ) {
 	const values = formDataTree.getAll( this.field );
 

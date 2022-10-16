@@ -1,8 +1,5 @@
 import { ValidationError } from '../error';
 
-/**
- * Verifies numerical values are not larger than threshold.
- */
 export const maxnumber = function ( formDataTree ) {
 	const values = formDataTree.getAll( this.field );
 

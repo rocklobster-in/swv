@@ -1,8 +1,5 @@
 import { ValidationError } from '../error';
 
-/**
- * Verifies number fields have number values.
- */
 export const number = function ( formDataTree ) {
 	const values = formDataTree.getAll( this.field );
 
