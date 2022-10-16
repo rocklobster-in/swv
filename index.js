@@ -1,6 +1,6 @@
 import FormDataTree from '@contactable/form-data-tree';
 
-import * as validators from './rules';
+import * as validators from './rules/index.js';
 import * as helpers from './helpers';
 import { ValidationError } from './error';
 
@@ -52,7 +52,7 @@ const validate = ( schema, formData, options = {} ) => {
 	return result;
 };
 
-export { 
+export {
 	validators,
 	validate,
 	helpers,
