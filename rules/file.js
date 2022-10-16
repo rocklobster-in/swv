@@ -1,9 +1,6 @@
 import { ValidationError } from '../error';
 import { convertMimeToExt } from '../helpers';
 
-/**
- * Verifies file fields have file values.
- */
 export const file = function ( formDataTree ) {
 	const values = formDataTree.getAll( this.field );
 

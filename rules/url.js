@@ -1,8 +1,5 @@
 import { ValidationError } from '../error';
 
-/**
- * Verifies URL fields have URL values.
- */
 export const url = function ( formDataTree ) {
 	const values = formDataTree.getAll( this.field );
 

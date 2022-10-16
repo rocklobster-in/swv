@@ -1,8 +1,5 @@
 import { ValidationError } from '../error';
 
-/**
- * Verifies date fields have date values.
- */
 export const date = function ( formDataTree ) {
 	const values = formDataTree.getAll( this.field );
 

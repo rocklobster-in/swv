@@ -1,8 +1,5 @@
 import { ValidationError } from '../error';
 
-/**
- * Verifies required fields are filled in.
- */
 export const required = function ( formDataTree ) {
 	const values = formDataTree.getAll( this.field );
 

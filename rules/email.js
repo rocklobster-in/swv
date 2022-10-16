@@ -1,8 +1,5 @@
 import { ValidationError } from '../error';
 
-/**
- * Verifies email fields have email values.
- */
 export const email = function ( formDataTree ) {
 	const values = formDataTree.getAll( this.field );
 
