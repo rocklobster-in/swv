@@ -49,6 +49,11 @@ A `file` rule verifies that the field specified by the `field` property is empty
 If an `accept` property is specified, the file type must match one of file types that the property defines.
 
 
+## enum
+
+An `enum` rule verifies that the field specified by the `field` property is empty or that it has a value exactly the same as one of the array items specified by the `accept` property.
+
+
 ## minlength
 
 A `minlength` rule verifies that the total number of characters (as UTF-16 code units) in value of the fields specified by the `field` property is more than or equal to the number specified by the `threshold` property.

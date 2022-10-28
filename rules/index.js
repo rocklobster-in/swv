@@ -6,6 +6,7 @@ export { tel } from './tel';
 export { number } from './number';
 export { date } from './date';
 export { file } from './file';
+export { enumeration as "enum" } from './enum';
 export { minlength } from './minlength';
 export { maxlength } from './maxlength';
 export { minnumber } from './minnumber';
