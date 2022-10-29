@@ -7,6 +7,8 @@ export { number } from './number';
 export { date } from './date';
 export { file } from './file';
 export { enumeration as "enum" } from './enum';
+export { minitems } from './minitems';
+export { maxitems } from './maxitems';
 export { minlength } from './minlength';
 export { maxlength } from './maxlength';
 export { minnumber } from './minnumber';
