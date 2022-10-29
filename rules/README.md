@@ -54,6 +54,16 @@ If an `accept` property is specified, the file type must match one of file types
 An `enum` rule verifies that the field specified by the `field` property is empty or that it has a value exactly the same as one of the array items specified by the `accept` property.
 
 
+## minitems
+
+A `minitems` rule verifies that the field specified by the `field` property has values, and the number of values is more than or equal to the number specified by the `threshold` property.
+
+
+## maxitems
+
+A `maxitems` rule verifies that the field specified by the `field` property has values, and the number of values is less than or equal to the number specified by the `threshold` property.
+
+
 ## minlength
 
 A `minlength` rule verifies that the total number of characters (as UTF-16 code units) in value of the fields specified by the `field` property is more than or equal to the number specified by the `threshold` property.
