@@ -102,3 +102,76 @@ A `minfilesize` rule verifies that the size of the file object value of the fiel
 ## maxfilesize
 
 A `maxfilesize` rule verifies that the size of the file object value of the field specified by the `field` property is not larger than the size specified by the `threshold` property.
+
+
+# Meta schema
+
+This is the meta schema for SWV schemas based on [JSON Schema](https://json-schema.org/).
+
+```
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Contact Form 7 SWV",
+    "description": "Contact Form 7 SWV meta-schema",
+    "type": "object",
+    "properties": {
+        "version": {
+            "type": "string"
+        },
+        "locale": {
+            "type": "string"
+        },
+        "rules": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "rule": {
+                        "type": "string",
+                        "enum": [
+                            "required",
+                            "requiredfile",
+                            "email",
+                            "url",
+                            "tel",
+                            "number",
+                            "date",
+                            "file",
+                            "enum",
+                            "minitems",
+                            "maxitems",
+                            "minlength",
+                            "maxlength",
+                            "minnumber",
+                            "maxnumber",
+                            "mindate",
+                            "maxdate",
+                            "minfilesize",
+                            "maxfilesize"
+                        ]
+                    },
+                    "field": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z][-A-Za-z0-9_:]*$"
+                    },
+                    "error": {
+                        "type": "string"
+                    },
+                    "accept": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "threshold": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "rule"
+                ]
+            }
+        }
+    }
+}
+```
