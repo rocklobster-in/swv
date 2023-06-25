@@ -7,6 +7,7 @@ export { number } from './number';
 export { date } from './date';
 export { file } from './file';
 export { enumeration as "enum" } from './enum';
+export { dayofweek } from './dayofweek';
 export { minitems } from './minitems';
 export { maxitems } from './maxitems';
 export { minlength } from './minlength';
