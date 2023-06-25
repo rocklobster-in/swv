@@ -42,6 +42,11 @@ The definition of a valid floating-point number is according to the [HTML5 speci
 A `date` rule verifies that the field specified by the `field` property is empty or has a date value in the [YYYY-MM-DD format](https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string).
 
 
+## time
+
+A `time` rule verifies that the field specified by the `field` property is empty or has a time value in the [hh:mm or hh:mm:ss format](https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-time-string).
+
+
 ## file
 
 A `file` rule verifies that the field specified by the `field` property is empty or has a file object value.
