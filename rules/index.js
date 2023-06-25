@@ -5,6 +5,7 @@ export { url } from './url';
 export { tel } from './tel';
 export { number } from './number';
 export { date } from './date';
+export { time } from './time';
 export { file } from './file';
 export { enumeration as "enum" } from './enum';
 export { dayofweek } from './dayofweek';
