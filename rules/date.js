@@ -5,7 +5,15 @@ export const date = function ( formDataTree ) {
 
 	// https://html.spec.whatwg.org/multipage/input.html#date-state-(type=date)
 	const isValidDateString = text => {
-		return /^[0-9]{4,}-[0-9]{2}-[0-9]{2}$/.test( text.trim() );
+		text = text.trim();
+
+		if ( ! /^[0-9]{4,}-[0-9]{2}-[0-9]{2}$/.test( text ) ) {
+			return false;
+		}
+
+		const date = new Date( text );
+
+		return ! Number.isNaN( date.valueOf() );
 	};
 
 	if ( ! values.every( isValidDateString ) ) {
