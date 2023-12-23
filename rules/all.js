@@ -16,24 +16,13 @@ export const all = function ( formDataTree, options = {} ) {
 		}
 	);
 
-	const errors = [];
-
-	const result = rules.every( ( { rule, ...properties } ) => {
+	rules.forEach( ( { rule, ...properties } ) => {
 		try {
 			validators[ rule ].call( { rule, ...properties }, formDataTree, options );
 		} catch ( error ) {
 			if ( error instanceof ValidationError ) {
-				errors.push( error );
-				return false;
+				throw error;
 			}
 		}
-
-		return true;
 	} );
-
-	if ( ! result ) {
-		throw new ValidationError(
-			{ ...this, ...{ error: errors.shift().error } }
-		);
-	}
 };
