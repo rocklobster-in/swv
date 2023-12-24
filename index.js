@@ -28,15 +28,17 @@ const validate = ( schema, formData, options = {} ) => {
 	const result = rules.reduce( ( result, current ) => {
 		const { rule, ...properties } = current;
 
-		if ( result.get( properties.field )?.error ) {
-			return result;
-		}
-
 		try {
 			validators[ rule ].call( { rule, ...properties }, formDataTree, options );
 		} catch ( error ) {
-			if ( error instanceof ValidationError && undefined !== error.error ) {
-				return result.set( properties.field, error );
+			if ( error instanceof ValidationError ) {
+				if (
+					undefined !== error.field &&
+					! result.has( error.field ) &&
+					undefined !== error.error
+				) {
+					return result.set( error.field, error );
+				}
 			}
 		}
 
