@@ -16,7 +16,7 @@ export const all = function ( formDataTree, options = {} ) {
 		}
 	);
 
-	rules.every( ( { rule, ...properties } ) => {
+	const result = rules.every( ( { rule, ...properties } ) => {
 		try {
 			validators[ rule ].call( { rule, ...properties }, formDataTree, options );
 		} catch ( error ) {
@@ -31,4 +31,8 @@ export const all = function ( formDataTree, options = {} ) {
 
 		return true;
 	} );
+
+	if ( ! result ) {
+		throw new ValidationError( this );
+	}
 };
