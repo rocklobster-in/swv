@@ -35,7 +35,7 @@ const validate = ( schema, formData, options = {} ) => {
 		try {
 			validators[ rule ].call( { rule, ...properties }, formDataTree, options );
 		} catch ( error ) {
-			if ( error instanceof ValidationError ) {
+			if ( error instanceof ValidationError && undefined !== error.error ) {
 				return result.set( properties.field, error );
 			}
 		}
