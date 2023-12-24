@@ -20,3 +20,4 @@ export { maxdate } from './maxdate';
 export { minfilesize } from './minfilesize';
 export { maxfilesize } from './maxfilesize';
 export { all } from './all';
+export { any } from './any';
