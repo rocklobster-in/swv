@@ -22,7 +22,11 @@ export const any = function ( formDataTree, options = {} ) {
 		} catch ( error ) {
 			if ( error instanceof ValidationError ) {
 				return false;
+			} else {
+				throw error;
 			}
+
+			return false;
 		}
 
 		return true;

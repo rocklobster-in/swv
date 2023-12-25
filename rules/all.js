@@ -23,10 +23,12 @@ export const all = function ( formDataTree, options = {} ) {
 			if ( error instanceof ValidationError ) {
 				if ( undefined !== error.error ) {
 					throw error;
-				} else {
-					return false;
 				}
+			} else {
+				throw error;
 			}
+
+			return false;
 		}
 
 		return true;
