@@ -39,6 +39,8 @@ const validate = ( schema, formData, options = {} ) => {
 				) {
 					return result.set( error.field, error );
 				}
+			} else {
+				throw error;
 			}
 		}
 
