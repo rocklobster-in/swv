@@ -4,6 +4,12 @@ import * as validators from './rules';
 import * as helpers from './helpers';
 import { ValidationError } from './error';
 
+const middlewares = [];
+
+const registerMiddleware = middleware => {
+	middlewares.push( middleware );
+};
+
 const validate = ( schema, formData, options = {} ) => {
 	const rules = ( schema.rules ?? [] ).filter(
 		( { rule, ...properties } ) => {
@@ -23,13 +29,24 @@ const validate = ( schema, formData, options = {} ) => {
 		return new Map();
 	}
 
+	const defaultRuleHandler = ruleObj => {
+		const { rule } = ruleObj;
+
+		validators[ rule ].call( ruleObj, formDataTree, options );
+	};
+
+	const enhancedHandler = middlewares.reduce(
+		( next, middleware ) => {
+			return ruleObj => middleware( ruleObj, next );
+		},
+		defaultRuleHandler
+	);
+
 	const formDataTree = new FormDataTree( formData );
 
 	const result = rules.reduce( ( result, current ) => {
-		const { rule, ...properties } = current;
-
 		try {
-			validators[ rule ].call( { rule, ...properties }, formDataTree, options );
+			enhancedHandler( current );
 		} catch ( error ) {
 			if ( error instanceof ValidationError ) {
 				if (
@@ -59,6 +76,7 @@ const validate = ( schema, formData, options = {} ) => {
 export {
 	validators,
 	validate,
+	registerMiddleware as use,
 	helpers,
 	ValidationError
 };
