@@ -1,28 +1,19 @@
-import * as validators from '../rules';
+import { ruleMatches, defaultRuleHandler } from '../rule-handler';
+import { applyMiddlewares } from '../middleware';
 import { ValidationError } from '../error';
 
 export const any = function ( formDataTree, options = {} ) {
 	const rules = ( this.rules ?? [] ).filter(
-		( { rule, ...properties } ) => {
-			if ( 'function' !== typeof validators[ rule ] ) {
-				return false;
-			}
-
-			if ( 'function' === typeof validators[ rule ].matches ) {
-				return validators[ rule ].matches( properties, options );
-			}
-
-			return true;
-		}
+		ruleObj => ruleMatches( { ruleObj, options } )
 	);
 
-	const result = rules.some( ( { rule, ...properties } ) => {
+	const enhancedRuleHandler = applyMiddlewares( defaultRuleHandler );
+
+	const result = rules.some( ruleObj => {
 		try {
-			validators[ rule ].call( { rule, ...properties }, formDataTree, options );
+			enhancedRuleHandler( { ruleObj, formDataTree, options } );
 		} catch ( error ) {
-			if ( error instanceof ValidationError ) {
-				return false;
-			} else {
+			if ( ! ( error instanceof ValidationError ) ) {
 				throw error;
 			}
 
