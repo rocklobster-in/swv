@@ -51,7 +51,7 @@ const validate = ( schema, formData, options = {} ) => {
 export {
 	validators,
 	validate,
-	registerMiddleware as use,
+	registerMiddleware,
 	helpers,
 	ValidationError
 };
