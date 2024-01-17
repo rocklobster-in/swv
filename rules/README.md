@@ -173,7 +173,9 @@ This is the meta schema for SWV schemas based on [JSON Schema](https://json-sche
                             "mindate",
                             "maxdate",
                             "minfilesize",
-                            "maxfilesize"
+                            "maxfilesize",
+                            "all",
+                            "any"
                         ]
                     },
                     "field": {
