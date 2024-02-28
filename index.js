@@ -2,41 +2,37 @@ import FormDataTree from '@contactable/form-data-tree';
 
 import * as validators from './rules';
 import * as helpers from './helpers';
+import { ruleMatches, defaultRuleHandler } from './rule-handler';
+import { registerMiddleware, applyMiddlewares } from './middleware';
 import { ValidationError } from './error';
 
 const validate = ( schema, formData, options = {} ) => {
 	const rules = ( schema.rules ?? [] ).filter(
-		( { rule, ...properties } ) => {
-			if ( 'function' !== typeof validators[ rule ] ) {
-				return false;
-			}
-
-			if ( 'function' === typeof validators[ rule ].matches ) {
-				return validators[ rule ].matches( properties, options );
-			}
-
-			return true;
-		}
+		ruleObj => ruleMatches( { ruleObj, options } )
 	);
 
 	if ( ! rules.length ) { // There is no rule to validate.
 		return new Map();
 	}
 
+	const enhancedRuleHandler = applyMiddlewares( defaultRuleHandler );
+
 	const formDataTree = new FormDataTree( formData );
 
 	const result = rules.reduce( ( result, current ) => {
-		const { rule, ...properties } = current;
-
-		if ( result.get( properties.field )?.error ) {
-			return result;
-		}
-
 		try {
-			validators[ rule ].call( { rule, ...properties }, formDataTree );
+			enhancedRuleHandler( { ruleObj: current, formDataTree, options } );
 		} catch ( error ) {
 			if ( error instanceof ValidationError ) {
-				return result.set( properties.field, error );
+				if (
+					undefined !== error.field &&
+					! result.has( error.field ) &&
+					undefined !== error.error
+				) {
+					return result.set( error.field, error );
+				}
+			} else {
+				throw error;
 			}
 		}
 
@@ -55,6 +51,7 @@ const validate = ( schema, formData, options = {} ) => {
 export {
 	validators,
 	validate,
+	registerMiddleware,
 	helpers,
 	ValidationError
 };

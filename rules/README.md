@@ -116,6 +116,18 @@ A `minfilesize` rule verifies that the size of the file object value of the fiel
 A `maxfilesize` rule verifies that the size of the file object value of the field specified by the `field` property is not larger than the size specified by the `threshold` property.
 
 
+## all
+
+An `all` rule verifies that all of the child rules in the `rules` property are verified. Child rules are evaluated in order from the top, and if one of the rules fails, the iteration will terminate there.
+
+The failed child rule's `error` and `field` properties override the parent's counterparts.
+
+
+## any
+
+An `any` rule verifies that any of the child rules in the `rules` property are verified. Child rules are evaluated in order from the top, and if one of the rules passes, the iteration will terminate there.
+
+
 # Meta schema
 
 This is the meta schema for SWV schemas based on [JSON Schema](https://json-schema.org/).
@@ -161,7 +173,9 @@ This is the meta schema for SWV schemas based on [JSON Schema](https://json-sche
                             "mindate",
                             "maxdate",
                             "minfilesize",
-                            "maxfilesize"
+                            "maxfilesize",
+                            "all",
+                            "any"
                         ]
                     },
                     "field": {
