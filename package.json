@@ -1,6 +1,6 @@
 {
   "name": "@contactable/swv",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Schema-Woven Validation (SWV) is the next generation of web form validation mechanism.",
   "main": "index.js",
   "scripts": {
