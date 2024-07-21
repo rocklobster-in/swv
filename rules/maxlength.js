@@ -7,7 +7,7 @@ export const maxlength = function ( formDataTree ) {
 
 	values.forEach( text => {
 		if ( 'string' === typeof text ) {
-			totalLength += text.length;
+			totalLength += text.trim().length;
 		}
 	} );
 
