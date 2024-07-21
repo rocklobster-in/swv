@@ -6,7 +6,7 @@ export const dayofweek = function ( formDataTree ) {
 	const convertToIso8601 = jsDow => ( 0 === jsDow ) ? 7 : jsDow;
 
 	const isAcceptableValue = value => {
-		const date = new Date( value );
+		const date = new Date( value.trim() );
 		const day = convertToIso8601( date.getDay() );
 
 		return this.accept?.some(
