@@ -7,6 +7,7 @@ export { number } from './number';
 export { date } from './date';
 export { time } from './time';
 export { file } from './file';
+export { stepnumber } from './stepnumber';
 export { enumeration as "enum" } from './enum';
 export { dayofweek } from './dayofweek';
 export { minitems } from './minitems';
