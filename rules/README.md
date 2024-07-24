@@ -54,13 +54,6 @@ A `file` rule verifies that the field specified by the `field` property is empty
 If an `accept` property is specified, the file type must match one of file types that the property defines.
 
 
-## stepnumber
-
-A `stepnumber` rule verifies that the field specified by the `field` property is empty or has a numerical value that matches one of the allowed values calculated based on the `base` and `interval` properties. Specifically, when the field value is equal to the base value plus an integral multiple of the interval value, the rule is validated.
-
-Both the `base` and `interval` properties must have an integer or a floating-point number value. The use of an `any` keyword, which HTML supports as the `step` attribute value, is not supported.
-
-
 ## enum
 
 An `enum` rule verifies that the field specified by the `field` property is empty or that it has a value exactly the same as one of the array items specified by the `accept` property.
@@ -121,6 +114,13 @@ A `minfilesize` rule verifies that the size of the file object value of the fiel
 ## maxfilesize
 
 A `maxfilesize` rule verifies that the size of the file object value of the field specified by the `field` property is not larger than the size specified by the `threshold` property.
+
+
+## stepnumber
+
+A `stepnumber` rule verifies that the field specified by the `field` property is empty or has a numerical value that matches one of the allowed values calculated based on the `base` and `interval` properties. Specifically, when the field value is equal to the base value plus an integral multiple of the interval value, the rule is validated.
+
+Both the `base` and `interval` properties must have an integer or a floating-point number value. The use of an `any` keyword, which HTML supports as the `step` attribute value, is not supported.
 
 
 ## all
