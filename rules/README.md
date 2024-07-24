@@ -181,6 +181,7 @@ This is the meta schema for SWV schemas based on [JSON Schema](https://json-sche
                             "maxdate",
                             "minfilesize",
                             "maxfilesize",
+                            "stepnumber",
                             "all",
                             "any"
                         ]
@@ -197,6 +198,13 @@ This is the meta schema for SWV schemas based on [JSON Schema](https://json-sche
                         "items": {
                             "type": "string"
                         }
+                    },
+                    "base": {
+                        "type": "string"
+                    },
+                    "interval": {
+                        "type": "number",
+                        "minimum": 0
                     },
                     "threshold": {
                         "type": "string"
