@@ -1,13 +1,14 @@
 import { ValidationError } from '../error';
 
 export const minlength = function ( formDataTree ) {
-	const values = formDataTree.getAll( this.field );
+	const values = formDataTree.getAll( this.field )
+		.map( val => val.trim() ).filter( val => '' !== val );
 
 	let totalLength = 0;
 
 	values.forEach( text => {
 		if ( 'string' === typeof text ) {
-			totalLength += text.trim().length;
+			totalLength += text.length;
 		}
 	} );
 

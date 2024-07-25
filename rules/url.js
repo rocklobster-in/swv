@@ -1,15 +1,10 @@
 import { ValidationError } from '../error';
 
 export const url = function ( formDataTree ) {
-	const values = formDataTree.getAll( this.field );
+	const values = formDataTree.getAll( this.field )
+		.map( val => val.trim() ).filter( val => '' !== val );
 
 	const isAbsoluteUrl = text => {
-		text = text.trim();
-
-		if ( '' === text ) {
-			return false;
-		}
-
 		try {
 			const urlObj = new URL( text );
 			const protocol = urlObj.protocol.replace( /:$/, '' );

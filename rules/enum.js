@@ -1,10 +1,11 @@
 import { ValidationError } from '../error';
 
 export const enumeration = function ( formDataTree ) {
-	const values = formDataTree.getAll( this.field );
+	const values = formDataTree.getAll( this.field )
+		.map( val => val.trim() ).filter( val => '' !== val );
 
 	const isAcceptableValue = value => this.accept?.some(
-		acceptableValue => value.trim() === String( acceptableValue )
+		acceptableValue => value === String( acceptableValue )
 	);
 
 	if ( ! values.every( isAcceptableValue ) ) {

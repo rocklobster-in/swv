@@ -1,12 +1,13 @@
 import { ValidationError } from '../error';
 
 export const time = function ( formDataTree ) {
-	const values = formDataTree.getAll( this.field );
+	const values = formDataTree.getAll( this.field )
+		.map( val => val.trim() ).filter( val => '' !== val );
 
 	// https://html.spec.whatwg.org/multipage/input.html#time-state-(type=time)
 	const isValidTimeString = text => {
 		const pattern = /^([0-9]{2})\:([0-9]{2})(?:\:([0-9]{2}))?$/;
-		const matches = text.trim().match( pattern );
+		const matches = text.match( pattern );
 
 		if ( ! matches ) {
 			return false;

@@ -1,7 +1,8 @@
 import { ValidationError } from '../error';
 
 export const stepnumber = function ( formDataTree ) {
-	const values = formDataTree.getAll( this.field );
+	const values = formDataTree.getAll( this.field )
+		.map( val => val.trim() ).filter( val => '' !== val );
 
 	const base = parseFloat( this.base );
 	const interval = parseFloat( this.interval );
@@ -11,8 +12,6 @@ export const stepnumber = function ( formDataTree ) {
 	}
 
 	const matchesStep = text => {
-		text = text.trim();
-
 		const remainder = ( parseFloat( text ) - base ) % interval;
 
 		if (
