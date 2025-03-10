@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/takayukister/swv.git"
+    "url": "git+https://github.com/rocklobster-in/swv.git"
   },
   "author": "Takayuki Miyoshi",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/takayukister/swv/issues"
+    "url": "https://github.com/rocklobster-in/swv/issues"
   },
-  "homepage": "https://github.com/takayukister/swv#readme",
+  "homepage": "https://github.com/rocklobster-in/swv#readme",
   "dependencies": {
-    "@contactable/form-data-tree": "^1.0.1"
+    "@contactable/form-data-tree": "^1.0.2"
   }
 }
