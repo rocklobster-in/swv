@@ -1,7 +1,8 @@
 import { ValidationError } from '../error';
 
 export const maxnumber = function ( formDataTree ) {
-	const values = formDataTree.getAll( this.field );
+	const values = formDataTree.getAll( this.field )
+		.map( val => val.trim() ).filter( val => '' !== val );
 
 	const isAcceptableNumber = text => {
 		if ( parseFloat( this.threshold ) < parseFloat( text ) ) {

@@ -1,11 +1,10 @@
 import { ValidationError } from '../error';
 
 export const maxdate = function ( formDataTree ) {
-	const values = formDataTree.getAll( this.field );
+	const values = formDataTree.getAll( this.field )
+		.map( val => val.trim() ).filter( val => '' !== val );
 
 	const isAcceptableDate = text => {
-		text = text.trim();
-
 		if (
 			/^[0-9]{4,}-[0-9]{2}-[0-9]{2}$/.test( text ) &&
 			/^[0-9]{4,}-[0-9]{2}-[0-9]{2}$/.test( this.threshold ) &&

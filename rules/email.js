@@ -1,13 +1,12 @@
 import { ValidationError } from '../error';
 
 export const email = function ( formDataTree ) {
-	const values = formDataTree.getAll( this.field );
+	const values = formDataTree.getAll( this.field )
+		.map( val => val.trim() ).filter( val => '' !== val );
 
 	// Equivalent to is_email()
 	// https://developer.wordpress.org/reference/functions/is_email/
 	const isValidEmail = text => {
-		text = text.trim();
-
 		if ( text.length < 6 ) {
 			return false;
 		}

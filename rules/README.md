@@ -116,6 +116,13 @@ A `minfilesize` rule verifies that the size of the file object value of the fiel
 A `maxfilesize` rule verifies that the size of the file object value of the field specified by the `field` property is not larger than the size specified by the `threshold` property.
 
 
+## stepnumber
+
+A `stepnumber` rule verifies that the field specified by the `field` property is empty or has a numerical value that matches one of the allowed values calculated based on the `base` and `interval` properties. Specifically, when the field value is equal to the base value plus an integral multiple of the interval value, the rule is validated.
+
+Both the `base` and `interval` properties must have an integer or a floating-point number value. The use of an `any` keyword, which HTML supports as the `step` attribute value, is not supported.
+
+
 ## all
 
 An `all` rule verifies that all of the child rules in the `rules` property are verified. Child rules are evaluated in order from the top, and if one of the rules fails, the iteration will terminate there.
@@ -174,6 +181,7 @@ This is the meta schema for SWV schemas based on [JSON Schema](https://json-sche
                             "maxdate",
                             "minfilesize",
                             "maxfilesize",
+                            "stepnumber",
                             "all",
                             "any"
                         ]
@@ -190,6 +198,13 @@ This is the meta schema for SWV schemas based on [JSON Schema](https://json-sche
                         "items": {
                             "type": "string"
                         }
+                    },
+                    "base": {
+                        "type": "string"
+                    },
+                    "interval": {
+                        "type": "number",
+                        "minimum": 0
                     },
                     "threshold": {
                         "type": "string"
