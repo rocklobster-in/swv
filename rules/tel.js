@@ -18,7 +18,7 @@ export const tel = function ( formDataTree ) {
 			return false;
 		}
 
-		if ( ! ( 6 < text.length && text.length < 16 ) ) {
+		if ( ! ( 5 < text.length && text.length < 16 ) ) {
 			return false;
 		}
 
