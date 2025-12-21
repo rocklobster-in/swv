@@ -1,6 +1,9 @@
-export function InvalidityException( { rule, field, error, ...properties } ) {
+export function InvalidityException( options ) {
+	{ message: error, cause, rule, field, ...properties } = options;
+
+	Error.call( this, message, { cause } );
+
 	this.name = 'InvalidityException';
-	this.message = error;
 	this.rule = rule;
 	this.field = field;
 	this.properties = properties;
