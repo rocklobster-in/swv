@@ -6,14 +6,14 @@ This is a JavaScript implementation of [Schema-Woven Validation (SWV)](https://c
 ## Installation
 
 ```
-npm install @contactable/swv --save
+npm install @rocklobsterinc/swv --save
 ```
 
 
 ## Validating user input based on schema
 
 ```
-import { validate } from '@contactable/swv';
+import { validate } from '@rocklobsterinc/swv';
 
 // schema: SWV schema object
 // formData: FormData object
