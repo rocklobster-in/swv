@@ -1,6 +1,6 @@
 import { ruleMatches, defaultRuleHandler } from '../rule-handler';
 import { applyMiddlewares } from '../middleware';
-import { ValidationError } from '../error';
+import { InvalidityException as Invalidity } from '../invalidity-exception';
 
 export const any = function ( formDataTree, options = {} ) {
 	const rules = ( this.rules ?? [] ).filter(
@@ -13,7 +13,7 @@ export const any = function ( formDataTree, options = {} ) {
 		try {
 			enhancedRuleHandler( { ruleObj, formDataTree, options } );
 		} catch ( error ) {
-			if ( ! ( error instanceof ValidationError ) ) {
+			if ( ! ( error instanceof Invalidity ) ) {
 				throw error;
 			}
 
@@ -24,6 +24,6 @@ export const any = function ( formDataTree, options = {} ) {
 	} );
 
 	if ( ! result ) {
-		throw new ValidationError( this );
+		throw new Invalidity( this );
 	}
 };

@@ -1,4 +1,4 @@
-import { ValidationError } from '../error';
+import { InvalidityException as Invalidity } from '../invalidity-exception';
 
 export const stepnumber = function ( formDataTree ) {
 	const values = formDataTree.getAll( this.field )
@@ -25,6 +25,6 @@ export const stepnumber = function ( formDataTree ) {
 	};
 
 	if ( ! values.every( matchesStep ) ) {
-		throw new ValidationError( this );
+		throw new Invalidity( this );
 	}
 };

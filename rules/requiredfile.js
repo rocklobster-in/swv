@@ -1,9 +1,9 @@
-import { ValidationError } from '../error';
+import { InvalidityException as Invalidity } from '../invalidity-exception';
 
 export const requiredfile = function ( formDataTree ) {
 	const values = formDataTree.getAll( this.field );
 
 	if ( 0 === values.length ) {
-		throw new ValidationError( this );
+		throw new Invalidity( this );
 	}
 };

@@ -1,4 +1,4 @@
-import { ValidationError } from '../error';
+import { InvalidityException as Invalidity } from '../invalidity-exception';
 
 export const minlength = function ( formDataTree ) {
 	const values = formDataTree.getAll( this.field )
@@ -13,6 +13,6 @@ export const minlength = function ( formDataTree ) {
 	} );
 
 	if ( 0 !== totalLength && totalLength < parseInt( this.threshold ) ) {
-		throw new ValidationError( this );
+		throw new Invalidity( this );
 	}
 };

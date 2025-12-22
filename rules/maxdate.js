@@ -1,4 +1,4 @@
-import { ValidationError } from '../error';
+import { InvalidityException as Invalidity } from '../invalidity-exception';
 
 export const maxdate = function ( formDataTree ) {
 	const values = formDataTree.getAll( this.field )
@@ -17,6 +17,6 @@ export const maxdate = function ( formDataTree ) {
 	};
 
 	if ( ! values.every( isAcceptableDate ) ) {
-		throw new ValidationError( this );
+		throw new Invalidity( this );
 	}
 };

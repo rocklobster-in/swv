@@ -1,4 +1,4 @@
-import { ValidationError } from '../error';
+import { InvalidityException as Invalidity } from '../invalidity-exception';
 import { convertMimeToExt } from '../helpers';
 
 export const file = function ( formDataTree ) {
@@ -22,6 +22,6 @@ export const file = function ( formDataTree ) {
 	};
 
 	if ( ! values.every( isAcceptableFile ) ) {
-		throw new ValidationError( this );
+		throw new Invalidity( this );
 	}
 };

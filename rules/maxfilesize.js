@@ -1,4 +1,4 @@
-import { ValidationError } from '../error';
+import { InvalidityException as Invalidity } from '../invalidity-exception';
 
 export const maxfilesize = function ( formDataTree ) {
 	const values = formDataTree.getAll( this.field );
@@ -12,6 +12,6 @@ export const maxfilesize = function ( formDataTree ) {
 	} );
 
 	if ( parseInt( this.threshold ) < totalVolume ) {
-		throw new ValidationError( this );
+		throw new Invalidity( this );
 	}
 };

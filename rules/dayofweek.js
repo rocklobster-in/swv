@@ -1,4 +1,4 @@
-import { ValidationError } from '../error';
+import { InvalidityException as Invalidity } from '../invalidity-exception';
 
 export const dayofweek = function ( formDataTree ) {
 	const values = formDataTree.getAll( this.field )
@@ -16,6 +16,6 @@ export const dayofweek = function ( formDataTree ) {
 	};
 
 	if ( ! values.every( isAcceptableValue ) ) {
-		throw new ValidationError( this );
+		throw new Invalidity( this );
 	}
 };

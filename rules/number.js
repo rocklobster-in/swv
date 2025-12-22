@@ -1,4 +1,4 @@
-import { ValidationError } from '../error';
+import { InvalidityException as Invalidity } from '../invalidity-exception';
 
 export const number = function ( formDataTree ) {
 	const values = formDataTree.getAll( this.field )
@@ -18,6 +18,6 @@ export const number = function ( formDataTree ) {
 	};
 
 	if ( ! values.every( isValidFloatingPointNumber ) ) {
-		throw new ValidationError( this );
+		throw new Invalidity( this );
 	}
 };

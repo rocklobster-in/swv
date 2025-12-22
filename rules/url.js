@@ -1,4 +1,4 @@
-import { ValidationError } from '../error';
+import { InvalidityException as Invalidity } from '../invalidity-exception';
 
 export const url = function ( formDataTree ) {
 	const values = formDataTree.getAll( this.field )
@@ -22,6 +22,6 @@ export const url = function ( formDataTree ) {
 	};
 
 	if ( ! values.every( isAbsoluteUrl ) ) {
-		throw new ValidationError( this );
+		throw new Invalidity( this );
 	}
 };

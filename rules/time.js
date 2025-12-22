@@ -1,4 +1,4 @@
-import { ValidationError } from '../error';
+import { InvalidityException as Invalidity } from '../invalidity-exception';
 
 export const time = function ( formDataTree ) {
 	const values = formDataTree.getAll( this.field )
@@ -23,6 +23,6 @@ export const time = function ( formDataTree ) {
 	};
 
 	if ( ! values.every( isValidTimeString ) ) {
-		throw new ValidationError( this );
+		throw new Invalidity( this );
 	}
 };
