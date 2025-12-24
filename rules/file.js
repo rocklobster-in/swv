@@ -453,7 +453,7 @@ FileRule.convertMimeToExt = mime => {
  *
  * @param {Object} formDataTree - FormDataTree object to validate.
  */
-DateRule.prototype.validate = function ( formDataTree, context ) {
+FileRule.prototype.validate = function ( formDataTree, context ) {
 	const files = flattenTree( formDataTree.getAllFiles( this.field ) );
 
 	if ( ! files.length ) {

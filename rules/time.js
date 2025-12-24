@@ -42,7 +42,7 @@ TimeRule.isTime = text => {
  *
  * @param {Object} formDataTree - FormDataTree object to validate.
  */
-DateRule.prototype.validate = function ( formDataTree, context ) {
+TimeRule.prototype.validate = function ( formDataTree, context ) {
 	const values = flattenTree( formDataTree.getAll( this.field ) );
 
 	if ( ! values.length ) {
