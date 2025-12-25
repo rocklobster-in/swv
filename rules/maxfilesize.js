@@ -34,7 +34,7 @@ MaxFilesizeRule.prototype.validate = function ( formDataTree, context ) {
 	}, 0 );
 
 	if ( parseInt( this.threshold ) < totalVolume ) {
-		throw new Invalidity( { ...this } );
+		throw new Invalidity( { ...this, cause: totalVolume } );
 	}
 
 	return true;

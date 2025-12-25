@@ -34,7 +34,7 @@ MinFilesizeRule.prototype.validate = function ( formDataTree, context ) {
 	}, 0 );
 
 	if ( totalVolume < parseInt( this.threshold ) ) {
-		throw new Invalidity( { ...this } );
+		throw new Invalidity( { ...this, cause: totalVolume } );
 	}
 
 	return true;
