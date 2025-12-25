@@ -25,6 +25,8 @@ MinFilesizeRule.prototype.validate = function ( formDataTree, context ) {
 		return true;
 	}
 
+	const threshold = parseInt( this.threshold );
+
 	const totalVolume = files.reduce( ( accumulator, current ) => {
 		if ( current instanceof File ) {
 			accumulator += current.size;
@@ -33,7 +35,7 @@ MinFilesizeRule.prototype.validate = function ( formDataTree, context ) {
 		return accumulator;
 	}, 0 );
 
-	if ( totalVolume < parseInt( this.threshold ) ) {
+	if ( ! Number.isNaN( threshold ) && totalVolume < threshold ) {
 		throw new Invalidity( { ...this, cause: totalVolume } );
 	}
 
