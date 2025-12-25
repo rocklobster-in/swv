@@ -1,10 +1,35 @@
+import FormDataTree from '@rocklobsterinc/form-data-tree';
+
+import { AbstractRule } from '../abstract-rule';
 import { InvalidityException as Invalidity } from '../invalidity-exception';
+import { flattenTree } from '../helpers';
 
-export const maxitems = function ( formDataTree ) {
-	const values = formDataTree.getAll( this.field )
-		.map( val => val.trim() ).filter( val => '' !== val );
+export function MaxItemsRule( properties ) {
+	this.field = properties.field;
+	this.error = properties.error;
+	this.threshold = properties.threshold;
+}
 
-	if ( parseInt( this.threshold ) < values.length ) {
-		throw new Invalidity( this );
+Object.setPrototypeOf( MaxItemsRule.prototype, AbstractRule.prototype );
+
+
+/**
+ * Validates the form data according to the logic defined by the rule.
+ *
+ * @param {Object} formDataTree - FormDataTree object to validate.
+ */
+MaxItemsRule.prototype.validate = function ( formDataTree, context ) {
+	const values = flattenTree( formDataTree.getAll( this.field ) );
+
+	if ( ! values.length ) {
+		return true;
 	}
-};
+
+	const threshold = parseInt( this.threshold );
+
+	if ( NaN !== threshold && threshold < values.length ) {
+		throw new Invalidity( { ...this, cause: values.length } );
+	}
+
+	return true;
+}
