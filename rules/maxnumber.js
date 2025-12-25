@@ -1,18 +1,42 @@
+import FormDataTree from '@rocklobsterinc/form-data-tree';
+
+import { NumberRule } from './number';
+import { AbstractRule } from '../abstract-rule';
 import { InvalidityException as Invalidity } from '../invalidity-exception';
+import { flattenTree } from '../helpers';
 
-export const maxnumber = function ( formDataTree ) {
-	const values = formDataTree.getAll( this.field )
-		.map( val => val.trim() ).filter( val => '' !== val );
+export function MaxNumberRule( properties ) {
+	this.field = properties.field;
+	this.error = properties.error;
+	this.threshold = properties.threshold;
+}
 
-	const isAcceptableNumber = text => {
-		if ( parseFloat( this.threshold ) < parseFloat( text ) ) {
-			return false;
-		}
+Object.setPrototypeOf( MaxNumberRule.prototype, AbstractRule.prototype );
 
+
+/**
+ * Validates the form data according to the logic defined by the rule.
+ *
+ * @param {Object} formDataTree - FormDataTree object to validate.
+ */
+MaxNumberRule.prototype.validate = function ( formDataTree, context ) {
+	const values = flattenTree( formDataTree.getAll( this.field ) );
+
+	if ( ! values.length ) {
 		return true;
-	};
-
-	if ( ! values.every( isAcceptableNumber ) ) {
-		throw new Invalidity( this );
 	}
-};
+
+	const threshold = parseFloat( this.threshold );
+
+	if ( Number.isNaN( threshold ) ) {
+		return true;
+	}
+
+	for ( const value of values ) {
+		if ( NumberRule.isNumber( value ) && threshold < parseFloat( value ) ) {
+			throw new Invalidity( { ...this, cause: value } );
+		}
+	}
+
+	return true;
+}
