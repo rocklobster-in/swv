@@ -1,17 +1,41 @@
+import FormDataTree from '@rocklobsterinc/form-data-tree';
+
+import { AbstractRule } from '../abstract-rule';
 import { InvalidityException as Invalidity } from '../invalidity-exception';
+import { flattenTree } from '../helpers';
 
-export const maxfilesize = function ( formDataTree ) {
-	const values = formDataTree.getAll( this.field );
+export function MaxFilesizeRule( properties ) {
+	this.field = properties.field;
+	this.error = properties.error;
+	this.threshold = properties.threshold;
+}
 
-	let totalVolume = 0;
+Object.setPrototypeOf( MaxFilesizeRule.prototype, AbstractRule.prototype );
 
-	values.forEach( file => {
-		if ( file instanceof File ) {
-			totalVolume += file.size;
+
+/**
+ * Validates the form data according to the logic defined by the rule.
+ *
+ * @param {Object} formDataTree - FormDataTree object to validate.
+ */
+MaxFilesizeRule.prototype.validate = function ( formDataTree, context ) {
+	const files = flattenTree( formDataTree.getAllFiles( this.field ) );
+
+	if ( ! files.length ) {
+		return true;
+	}
+
+	const totalVolume = files.reduce( ( accumulator, current ) => {
+		if ( current instanceof File ) {
+			accumulator += current.size;
 		}
-	} );
+
+		return accumulator;
+	}, 0 );
 
 	if ( parseInt( this.threshold ) < totalVolume ) {
-		throw new Invalidity( this );
+		throw new Invalidity( { ...this } );
 	}
-};
+
+	return true;
+}
