@@ -1,22 +1,36 @@
+import FormDataTree from '@rocklobsterinc/form-data-tree';
+
+import { DateRule } from './date';
+import { AbstractRule } from '../abstract-rule';
 import { InvalidityException as Invalidity } from '../invalidity-exception';
+import { flattenTree } from '../helpers';
 
-export const mindate = function ( formDataTree ) {
-	const values = formDataTree.getAll( this.field )
-		.map( val => val.trim() ).filter( val => '' !== val );
+export function MinDateRule( properties ) {
+	this.field = properties.field;
+	this.error = properties.error;
+	this.threshold = properties.threshold;
+}
 
-	const isAcceptableDate = text => {
-		if (
-			/^[0-9]{4,}-[0-9]{2}-[0-9]{2}$/.test( text ) &&
-			/^[0-9]{4,}-[0-9]{2}-[0-9]{2}$/.test( this.threshold ) &&
-			text < this.threshold
-		) {
-			return false;
-		}
+Object.setPrototypeOf( MinDateRule.prototype, AbstractRule.prototype );
 
+
+/**
+ * Validates the form data according to the logic defined by the rule.
+ *
+ * @param {Object} formDataTree - FormDataTree object to validate.
+ */
+MinDateRule.prototype.validate = function ( formDataTree, context ) {
+	const values = flattenTree( formDataTree.getAll( this.field ) );
+
+	if ( ! values.length || ! DateRule.isDate( this.threshold ) ) {
 		return true;
-	};
-
-	if ( ! values.every( isAcceptableDate ) ) {
-		throw new Invalidity( this );
 	}
-};
+
+	for ( const value of values ) {
+		if ( DateRule.isDate( value ) && value < this.threshold ) {
+			throw new Invalidity( { ...this, cause: value } );
+		}
+	}
+
+	return true;
+}
