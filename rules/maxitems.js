@@ -27,7 +27,7 @@ MaxItemsRule.prototype.validate = function ( formDataTree, context ) {
 
 	const threshold = parseInt( this.threshold );
 
-	if ( NaN !== threshold && threshold < values.length ) {
+	if ( ! Number.isNaN( threshold ) && threshold < values.length ) {
 		throw new Invalidity( { ...this, cause: values.length } );
 	}
 
