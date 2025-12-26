@@ -38,7 +38,7 @@ AnyRule.prototype.validate = function ( formDataTree, context ) {
 		}
 	}
 
-	if ( false === isValid ) {
+	if ( ! isValid ) {
 		throw new Invalidity( { ...this } );
 	}
 
