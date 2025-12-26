@@ -19,6 +19,10 @@ Object.setPrototypeOf( AllRule.prototype, CompositeRule.prototype );
 AllRule.prototype.validate = function ( formDataTree, context ) {
 	const rules = ( this.rules ?? [] ).filter( rule => rule.matches( context ) );
 
+	if ( ! rules.length ) {
+		return true;
+	}
+
 	for ( const rule of rules ) {
 		try {
 			rule.validate( formDataTree, context );
