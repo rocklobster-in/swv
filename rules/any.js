@@ -1,29 +1,46 @@
-import { ruleMatches, defaultRuleHandler } from '../rule-handler';
-import { applyMiddlewares } from '../middleware';
+import FormDataTree from '@rocklobsterinc/form-data-tree';
+
+import { CompositeRule } from '../composite-rule';
 import { InvalidityException as Invalidity } from '../invalidity-exception';
 
-export const any = function ( formDataTree, options = {} ) {
-	const rules = ( this.rules ?? [] ).filter(
-		ruleObj => ruleMatches( { ruleObj, options } )
-	);
+export function AnyRule( properties ) {
+	this.field = properties.field;
+	this.error = properties.error;
+}
 
-	const enhancedRuleHandler = applyMiddlewares( defaultRuleHandler );
+Object.setPrototypeOf( AnyRule.prototype, CompositeRule.prototype );
 
-	const result = rules.some( ruleObj => {
+
+/**
+ * Validates the form data according to the logic defined by the rule.
+ *
+ * @param {Object} formDataTree - FormDataTree object to validate.
+ */
+AnyRule.prototype.validate = function ( formDataTree, context ) {
+	const rules = ( this.rules ?? [] ).filter( rule => rule.matches( context ) );
+
+	let isValid = null;
+
+	for ( const rule of rules ) {
 		try {
-			enhancedRuleHandler( { ruleObj, formDataTree, options } );
+			isValid = true;
+			rule.validate( formDataTree, context );
 		} catch ( error ) {
-			if ( ! ( error instanceof Invalidity ) ) {
+			if ( error instanceof Invalidity ) {
+				isValid = false;
+			} else {
 				throw error;
 			}
-
-			return false;
 		}
 
-		return true;
-	} );
-
-	if ( ! result ) {
-		throw new Invalidity( this );
+		if ( isValid ) {
+			break;
+		}
 	}
-};
+
+	if ( false === isValid ) {
+		throw new Invalidity( { ...this } );
+	}
+
+	return true;
+}
