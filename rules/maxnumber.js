@@ -34,7 +34,7 @@ MaxNumberRule.prototype.validate = function ( formDataTree, context ) {
 
 	for ( const value of values ) {
 		if ( NumberRule.isNumber( value ) && threshold < parseFloat( value ) ) {
-			throw new Invalidity( { ...this, cause: value } );
+			throw new Invalidity( this, { cause: value } );
 		}
 	}
 

@@ -479,7 +479,7 @@ FileRule.prototype.validate = function ( formDataTree, context ) {
 
 	for ( const file of files ) {
 		if ( ! isAcceptableFile( file ) ) {
-			throw new Invalidity( { ...this, cause: file } );
+			throw new Invalidity( this, { cause: file } );
 		}
 	}
 

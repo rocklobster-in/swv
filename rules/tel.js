@@ -53,7 +53,7 @@ TelRule.prototype.validate = function ( formDataTree, context ) {
 
 	for ( const value of values ) {
 		if ( ! TelRule.isTel( value ) ) {
-			throw new Invalidity( { ...this, cause: value } );
+			throw new Invalidity( this, { cause: value } );
 		}
 	}
 

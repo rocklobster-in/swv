@@ -51,7 +51,7 @@ TimeRule.prototype.validate = function ( formDataTree, context ) {
 
 	for ( const value of values ) {
 		if ( ! TimeRule.isTime( value ) ) {
-			throw new Invalidity( { ...this, cause: value } );
+			throw new Invalidity( this, { cause: value } );
 		}
 	}
 

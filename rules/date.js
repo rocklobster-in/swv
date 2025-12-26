@@ -43,7 +43,7 @@ DateRule.prototype.validate = function ( formDataTree, context ) {
 
 	for ( const value of values ) {
 		if ( ! DateRule.isDate( value ) ) {
-			throw new Invalidity( { ...this, cause: value } );
+			throw new Invalidity( this, { cause: value } );
 		}
 	}
 

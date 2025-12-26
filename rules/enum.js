@@ -27,7 +27,7 @@ EnumRule.prototype.validate = function ( formDataTree, context ) {
 
 	for ( const value of values ) {
 		if ( ! this.accept?.map( String ).includes( value ) ) {
-			throw new Invalidity( { ...this, cause: value } );
+			throw new Invalidity( this, { cause: value } );
 		}
 	}
 

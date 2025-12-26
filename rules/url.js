@@ -44,7 +44,7 @@ URLRule.prototype.validate = function ( formDataTree, context ) {
 
 	for ( const value of values ) {
 		if ( ! URLRule.isUrl( value ) ) {
-			throw new Invalidity( { ...this, cause: value } );
+			throw new Invalidity( this, { cause: value } );
 		}
 	}
 

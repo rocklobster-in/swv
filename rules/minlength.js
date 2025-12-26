@@ -32,7 +32,7 @@ MinLengthRule.prototype.validate = function ( formDataTree, context ) {
 	}, 0 );
 
 	if ( ! Number.isNaN( threshold ) && totalLength < threshold ) {
-		throw new Invalidity( { ...this, cause: totalLength } );
+		throw new Invalidity( this, { cause: totalLength } );
 	}
 
 	return true;

@@ -21,7 +21,7 @@ RequiredFileRule.prototype.validate = function ( formDataTree, context ) {
 	const files = flattenTree( formDataTree.getAllFiles( this.field ) );
 
 	if ( ! files.length ) {
-		throw new Invalidity( { ...this } );
+		throw new Invalidity( this );
 	}
 
 	return true;

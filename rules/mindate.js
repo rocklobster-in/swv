@@ -28,7 +28,7 @@ MinDateRule.prototype.validate = function ( formDataTree, context ) {
 
 	for ( const value of values ) {
 		if ( DateRule.isDate( value ) && value < this.threshold ) {
-			throw new Invalidity( { ...this, cause: value } );
+			throw new Invalidity( this, { cause: value } );
 		}
 	}
 

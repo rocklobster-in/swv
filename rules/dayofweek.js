@@ -32,7 +32,7 @@ DayofweekRule.prototype.validate = function ( formDataTree, context ) {
 		const day = convertToIso8601( date.getDay() );
 
 		if ( ! this.accept?.map( String ).includes( String( day ) ) ) {
-			throw new Invalidity( { ...this, cause: value } );
+			throw new Invalidity( this, { cause: value } );
 		}
 	}
 

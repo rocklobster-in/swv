@@ -28,7 +28,7 @@ MaxDateRule.prototype.validate = function ( formDataTree, context ) {
 
 	for ( const value of values ) {
 		if ( DateRule.isDate( value ) && this.threshold < value ) {
-			throw new Invalidity( { ...this, cause: value } );
+			throw new Invalidity( this, { cause: value } );
 		}
 	}
 

@@ -1,12 +1,11 @@
-export function InvalidityException( options ) {
-	{ message: error, cause, rule, field, ...properties } = options;
+export function InvalidityException( rule, options = {} ) {
+	const { error } = rule;
 
-	Error.call( this, message, { cause } );
+	Error.call( this, error, options );
 
-	this.name = 'InvalidityException';
 	this.rule = rule;
-	this.field = field;
-	this.properties = properties;
 }
+
+InvalidityException.prototype.name = 'InvalidityException';
 
 Object.setPrototypeOf( InvalidityException.prototype, Error.prototype );

@@ -28,7 +28,7 @@ MinItemsRule.prototype.validate = function ( formDataTree, context ) {
 	const threshold = parseInt( this.threshold );
 
 	if ( ! Number.isNaN( threshold ) && values.length < threshold ) {
-		throw new Invalidity( { ...this, cause: values.length } );
+		throw new Invalidity( this, { cause: values.length } );
 	}
 
 	return true;

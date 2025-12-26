@@ -21,7 +21,7 @@ RequiredRule.prototype.validate = function ( formDataTree, context ) {
 	const values = flattenTree( formDataTree.getAll( this.field ) );
 
 	if ( ! values.length ) {
-		throw new Invalidity( { ...this } );
+		throw new Invalidity( this );
 	}
 
 	return true;

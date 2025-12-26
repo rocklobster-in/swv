@@ -32,7 +32,7 @@ MaxLengthRule.prototype.validate = function ( formDataTree, context ) {
 	}, 0 );
 
 	if ( ! Number.isNaN( threshold ) && threshold < totalLength ) {
-		throw new Invalidity( { ...this, cause: totalLength } );
+		throw new Invalidity( this, { cause: totalLength } );
 	}
 
 	return true;

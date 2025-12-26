@@ -36,7 +36,7 @@ MaxFilesizeRule.prototype.validate = function ( formDataTree, context ) {
 	}, 0 );
 
 	if ( ! Number.isNaN( threshold ) && threshold < totalVolume ) {
-		throw new Invalidity( { ...this, cause: totalVolume } );
+		throw new Invalidity( this, { cause: totalVolume } );
 	}
 
 	return true;
