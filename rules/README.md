@@ -55,17 +55,17 @@ An `enum` rule verifies that the field specified by the `field` property is empt
 
 A `dayofweek` rule verifies that the field specified by the `field` property is empty or contains a date value that is on the day of the week specified by the `accept` property.
 
-The `accept` property accepts an array of ISO 8601-formatted integer values representing the days of the week (1 through 7, with 1 being Monday and 7 being Sunday).
+The `accept` property accepts an array of ISO 8601 integer values representing the days of the week (1 through 7, with 1 being Monday and 7 being Sunday).
 
 
 ## minitems
 
-A `minitems` rule verifies that the field specified by the `field` property is empty or has values, and if it has values, the number of values is more than or equal to the number specified by the `threshold` property.
+A `minitems` rule verifies that the number of selected fields (specified by the `field` property) is zero or a number larger than or equal to the number specified by the `threshold` property.
 
 
 ## maxitems
 
-A `maxitems` rule verifies that the field specified by the `field` property is empty or has values, and if it has values, the number of values is less than or equal to the number specified by the `threshold` property.
+A `maxitems` rule verifies that the number of selected fields (specified by the `field` property) is zero or a number smaller than or equal to the number specified by the `threshold` property.
 
 
 ## minlength
