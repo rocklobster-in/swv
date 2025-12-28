@@ -17,8 +17,6 @@ A `requiredfile` rule verifies that the field specified by the `field` property 
 
 An `email` rule verifies that the field specified by the `field` property is empty or has a valid email address value.
 
-If no `format` property is specified, a valid email address is an email address that passes the [`is_email()`](https://developer.wordpress.org/reference/functions/is_email/) function’s test.
-
 
 ## url
 
@@ -49,41 +47,39 @@ A `time` rule verifies that the field specified by the `field` property is empty
 
 ## file
 
-A `file` rule verifies that the field specified by the `field` property is empty or has a file object value.
-
-If an `accept` property is specified, the file type must match one of file types that the property defines.
+A `file` rule verifies that the field specified by the `field` property is empty or has a file object value. The file type must match one of file types specified by the `accept` property.
 
 
 ## enum
 
-An `enum` rule verifies that the field specified by the `field` property is empty or that it has a value exactly the same as one of the array items specified by the `accept` property.
+An `enum` rule verifies that the field specified by the `field` property is empty or has a value matching one of the values specified by the `accept` property.
 
 
 ## dayofweek
 
 A `dayofweek` rule verifies that the field specified by the `field` property is empty or has a date value which is on the day of the week specified by the `accept` property.
 
-The `accept` property must have an array of integer values representing the day of the week (from 1 through 7, beginning with Monday and ending with Sunday). This weekday numbering is based on ISO 8601.
+The `accept` property must have an array of integer values representing the day of the week (based on ISO 8601; from 1 through 7, beginning with Monday and ending with Sunday).
 
 
 ## minitems
 
-A `minitems` rule verifies that the field specified by the `field` property has values, and the number of values is more than or equal to the number specified by the `threshold` property.
+A `minitems` rule verifies that the field specified by the `field` property is empty or has values, and if it has values, the number of values is more than or equal to the number specified by the `threshold` property.
 
 
 ## maxitems
 
-A `maxitems` rule verifies that the field specified by the `field` property has values, and the number of values is less than or equal to the number specified by the `threshold` property.
+A `maxitems` rule verifies that the field specified by the `field` property is empty or has values, and if it has values, the number of values is less than or equal to the number specified by the `threshold` property.
 
 
 ## minlength
 
-A `minlength` rule verifies that the total number of characters (as UTF-16 code units) in value of the fields specified by the `field` property is more than or equal to the number specified by the `threshold` property.
+A `minlength` rule verifies that the field specified by the `field` property is empty or has a value whose number of characters is larger than or equal to the number specified by the `threshold` property. When there are two or more fields matching the rule, it verifies the total number of characters. Characters are counted as UTF-16 code units.
 
 
 ## maxlength
 
-A `maxlength` rule verifies that the total number of characters (as UTF-16 code units) in value of the fields specified by the `field` property is less than or equal to the number specified by the `threshold` property.
+A `maxlength` rule verifies that the field specified by the `field` property is empty or has a value whose number of characters is smaller than or equal to the number specified by the `threshold` property. When there are two or more fields matching the rule, it verifies the total number of characters. Characters are counted as UTF-16 code units.
 
 
 ## minnumber
