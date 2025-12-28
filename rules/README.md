@@ -70,32 +70,38 @@ A `maxitems` rule verifies that the number of selected fields (specified by the 
 
 ## minlength
 
-A `minlength` rule counts the characters (as UTF-16 code units) in the fields specified by the `field` property. It verifies that the number of characters is zero or a number larger than or equal to the number specified by the `threshold` property.
+A `minlength` rule counts the characters (as UTF-16 code units) in the fields specified by the `field` property. It verifies that the total number of characters is zero or a number larger than or equal to the number specified by the `threshold` property.
 
 
 ## maxlength
 
-A `maxlength` rule counts the characters (as UTF-16 code units) in the fields specified by the `field` property. It verifies that the number of characters is zero or a number smaller than or equal to the number specified by the `threshold` property.
+A `maxlength` rule counts the characters (as UTF-16 code units) in the fields specified by the `field` property. It verifies that the total number of characters is zero or a number smaller than or equal to the number specified by the `threshold` property.
 
 
 ## minnumber
 
-A `minnumber` rule verifies that the numerical value of the field specified by the `field` property is equal to or greater than the number specified by the `threshold` property.
+A `minnumber` rule verifies that the field specified by the `field` property is empty or contains a numerical value that is equal to or greater than the number specified by the `threshold` property.
 
 
 ## maxnumber
 
-A `maxnumber` rule verifies that the numerical value of the field specified by the `field` property is equal to or lower than the number specified by the `threshold` property.
+A `maxnumber` rule verifies that the field specified by the `field` property is empty or contains a numerical value that is equal to or lower than the number specified by the `threshold` property.
 
 
 ## mindate
 
-A `mindate` rule verifies that the date value of the field specified by the `field` property is not earlier than the date specified by the `threshold` property.
+A `mindate` rule verifies that the field specified by the `field` property is empty or contains a date value that is not earlier than the date specified by the `threshold` property.
 
 
 ## maxdate
 
-A `maxdate` rule verifies that the date value of the field specified by the `field` property is not later than the date specified by the `threshold` property.
+A `maxdate` rule verifies that the field specified by the `field` property is empty or contains a date value that is not later than the date specified by the `threshold` property.
+
+
+
+
+
+
 
 
 ## minfilesize
