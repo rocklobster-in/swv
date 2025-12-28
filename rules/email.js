@@ -9,6 +9,8 @@ export function EmailRule( properties ) {
 	this.error = properties.error;
 }
 
+EmailRule.RULE_NAME = 'email';
+
 Object.setPrototypeOf( EmailRule.prototype, AbstractRule.prototype );
 
 

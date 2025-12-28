@@ -9,6 +9,8 @@ export function TelRule( properties ) {
 	this.error = properties.error;
 }
 
+TelRule.RULE_NAME = 'tel';
+
 Object.setPrototypeOf( TelRule.prototype, AbstractRule.prototype );
 
 

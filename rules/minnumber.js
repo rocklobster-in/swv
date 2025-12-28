@@ -11,6 +11,8 @@ export function MinNumberRule( properties ) {
 	this.threshold = properties.threshold;
 }
 
+MinNumberRule.RULE_NAME = 'minnumber';
+
 Object.setPrototypeOf( MinNumberRule.prototype, AbstractRule.prototype );
 
 

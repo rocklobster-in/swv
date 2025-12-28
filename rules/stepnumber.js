@@ -11,6 +11,8 @@ export function StepNumberRule( properties ) {
 	this.interval = properties.interval;
 }
 
+StepNumberRule.RULE_NAME = 'stepnumber';
+
 Object.setPrototypeOf( StepNumberRule.prototype, AbstractRule.prototype );
 
 

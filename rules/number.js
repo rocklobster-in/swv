@@ -9,6 +9,8 @@ export function NumberRule( properties ) {
 	this.error = properties.error;
 }
 
+NumberRule.RULE_NAME = 'number';
+
 Object.setPrototypeOf( NumberRule.prototype, AbstractRule.prototype );
 
 

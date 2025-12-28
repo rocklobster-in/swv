@@ -9,6 +9,8 @@ export function TimeRule( properties ) {
 	this.error = properties.error;
 }
 
+TimeRule.RULE_NAME = 'time';
+
 Object.setPrototypeOf( TimeRule.prototype, AbstractRule.prototype );
 
 

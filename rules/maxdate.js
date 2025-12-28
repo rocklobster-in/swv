@@ -11,6 +11,8 @@ export function MaxDateRule( properties ) {
 	this.threshold = properties.threshold;
 }
 
+MaxDateRule.RULE_NAME = 'maxdate';
+
 Object.setPrototypeOf( MaxDateRule.prototype, AbstractRule.prototype );
 
 

@@ -10,6 +10,8 @@ export function MaxFilesizeRule( properties ) {
 	this.threshold = properties.threshold;
 }
 
+MaxFilesizeRule.RULE_NAME = 'maxfilesize';
+
 Object.setPrototypeOf( MaxFilesizeRule.prototype, AbstractRule.prototype );
 
 

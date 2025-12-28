@@ -9,6 +9,8 @@ export function DateRule( properties ) {
 	this.error = properties.error;
 }
 
+DateRule.RULE_NAME = 'date';
+
 Object.setPrototypeOf( DateRule.prototype, AbstractRule.prototype );
 
 

@@ -10,6 +10,8 @@ export function EnumRule( properties ) {
 	this.accept = properties.accept;
 }
 
+EnumRule.RULE_NAME = 'enum';
+
 Object.setPrototypeOf( EnumRule.prototype, AbstractRule.prototype );
 
 

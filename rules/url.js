@@ -9,6 +9,8 @@ export function URLRule( properties ) {
 	this.error = properties.error;
 }
 
+URLRule.RULE_NAME = 'url';
+
 Object.setPrototypeOf( URLRule.prototype, AbstractRule.prototype );
 
 

@@ -10,6 +10,8 @@ export function MaxItemsRule( properties ) {
 	this.threshold = properties.threshold;
 }
 
+MaxItemsRule.RULE_NAME = 'maxitems';
+
 Object.setPrototypeOf( MaxItemsRule.prototype, AbstractRule.prototype );
 
 

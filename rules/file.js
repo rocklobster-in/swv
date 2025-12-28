@@ -10,6 +10,8 @@ export function FileRule( properties ) {
 	this.accept = properties.accept;
 }
 
+FileRule.RULE_NAME = 'file';
+
 Object.setPrototypeOf( FileRule.prototype, AbstractRule.prototype );
 
 

@@ -10,6 +10,8 @@ export function MinFilesizeRule( properties ) {
 	this.threshold = properties.threshold;
 }
 
+MinFilesizeRule.RULE_NAME = 'minfilesize';
+
 Object.setPrototypeOf( MinFilesizeRule.prototype, AbstractRule.prototype );
 
 

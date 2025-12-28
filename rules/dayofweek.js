@@ -10,6 +10,8 @@ export function DayofweekRule( properties ) {
 	this.accept = properties.accept;
 }
 
+DayofweekRule.RULE_NAME = 'dayofweek';
+
 Object.setPrototypeOf( DayofweekRule.prototype, AbstractRule.prototype );
 
 

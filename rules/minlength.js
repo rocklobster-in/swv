@@ -10,6 +10,8 @@ export function MinLengthRule( properties ) {
 	this.threshold = properties.threshold;
 }
 
+MinLengthRule.RULE_NAME = 'minlength';
+
 Object.setPrototypeOf( MinLengthRule.prototype, AbstractRule.prototype );
 
 

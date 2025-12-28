@@ -10,6 +10,8 @@ export function MinItemsRule( properties ) {
 	this.threshold = properties.threshold;
 }
 
+MinItemsRule.RULE_NAME = 'minitems';
+
 Object.setPrototypeOf( MinItemsRule.prototype, AbstractRule.prototype );
 
 

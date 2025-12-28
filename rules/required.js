@@ -9,6 +9,8 @@ export function RequiredRule( properties ) {
 	this.error = properties.error;
 }
 
+RequiredRule.RULE_NAME = 'required';
+
 Object.setPrototypeOf( RequiredRule.prototype, AbstractRule.prototype );
 
 

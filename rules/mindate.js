@@ -11,6 +11,8 @@ export function MinDateRule( properties ) {
 	this.threshold = properties.threshold;
 }
 
+MinDateRule.RULE_NAME = 'mindate';
+
 Object.setPrototypeOf( MinDateRule.prototype, AbstractRule.prototype );
 
 

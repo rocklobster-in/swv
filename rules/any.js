@@ -8,6 +8,8 @@ export function AnyRule( properties ) {
 	this.error = properties.error;
 }
 
+AnyRule.RULE_NAME = 'any';
+
 Object.setPrototypeOf( AnyRule.prototype, CompositeRule.prototype );
 
 

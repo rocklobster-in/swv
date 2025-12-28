@@ -10,6 +10,8 @@ export function MaxLengthRule( properties ) {
 	this.threshold = properties.threshold;
 }
 
+MaxLengthRule.RULE_NAME = 'maxlength';
+
 Object.setPrototypeOf( MaxLengthRule.prototype, AbstractRule.prototype );
 
 

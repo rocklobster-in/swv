@@ -11,6 +11,8 @@ export function MaxNumberRule( properties ) {
 	this.threshold = properties.threshold;
 }
 
+MaxNumberRule.RULE_NAME = 'maxnumber';
+
 Object.setPrototypeOf( MaxNumberRule.prototype, AbstractRule.prototype );
 
 
