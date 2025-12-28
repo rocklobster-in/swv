@@ -3,9 +3,7 @@
 
 ## required
 
-A `required` rule verifies that the field specified by the `field` property has a value that is not a zero-length string.
-
-You cannot use this rule type for file uploading fields. For file uploading fields, use the `requiredfile` rule type instead.
+A `required` rule verifies that the field specified by the `field` property has a string value.
 
 
 ## requiredfile
@@ -15,34 +13,32 @@ A `requiredfile` rule verifies that the field specified by the `field` property 
 
 ## email
 
-An `email` rule verifies that the field specified by the `field` property is empty or has a valid email address value.
+An `email` rule verifies that the field specified by the `field` property is empty or contains a valid email address.
 
 
 ## url
 
-A `url` rule verifies that the field specified by the `field` property is empty or has a valid URL value.
+A `url` rule verifies that the field specified by the `field` property is empty or contains a valid URL (only 'http' and 'https' protocols are acceptable).
 
 
 ## tel
 
-A `tel` rule verifies that the field specified by the `field` property is empty or has a telephone number value.
+A `tel` rule verifies that the field specified by the `field` property is empty or contains a telephone number.
 
 
 ## number
 
-A `number` rule verifies that the field specified by the `field` property is empty or has a string value representing a floating-point number.
-
-The definition of a valid floating-point number is according to the [HTML5 specification](https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-floating-point-number).
+A `number` rule verifies that the field specified by the `field` property is empty or contains a string value that represents a floating-point number.
 
 
 ## date
 
-A `date` rule verifies that the field specified by the `field` property is empty or has a date value in the [YYYY-MM-DD format](https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string).
+A `date` rule verifies that the field specified by the `field` property is empty or contains a date value in the YYYY-MM-DD format.
 
 
 ## time
 
-A `time` rule verifies that the field specified by the `field` property is empty or has a time value in the [hh:mm or hh:mm:ss format](https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-time-string).
+A `time` rule verifies that the field specified by the `field` property is empty or contains a time value in the hh:mm or hh:mm:ss format.
 
 
 ## file
