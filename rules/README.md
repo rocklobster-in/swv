@@ -43,19 +43,19 @@ A `time` rule verifies that the field specified by the `field` property is empty
 
 ## file
 
-A `file` rule verifies that the field specified by the `field` property is empty or has a file object value. The file type must match one of file types specified by the `accept` property.
+A `file` rule verifies that the field specified by the `field` property is empty or contains a file object value, and its file type matches one of the file types specified by the `accept` property.
 
 
 ## enum
 
-An `enum` rule verifies that the field specified by the `field` property is empty or has a value matching one of the values specified by the `accept` property.
+An `enum` rule verifies that the field specified by the `field` property is empty or contains a string value that matches one of the values specified by the `accept` property.
 
 
 ## dayofweek
 
-A `dayofweek` rule verifies that the field specified by the `field` property is empty or has a date value which is on the day of the week specified by the `accept` property.
+A `dayofweek` rule verifies that the field specified by the `field` property is empty or contains a date value that is on the day of the week specified by the `accept` property.
 
-The `accept` property must have an array of integer values representing the day of the week (based on ISO 8601; from 1 through 7, beginning with Monday and ending with Sunday).
+The `accept` property accepts an array of ISO 8601-formatted integer values representing the days of the week (1 through 7, with 1 being Monday and 7 being Sunday).
 
 
 ## minitems
