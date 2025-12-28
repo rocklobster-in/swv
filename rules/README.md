@@ -70,12 +70,12 @@ A `maxitems` rule verifies that the number of selected fields (specified by the 
 
 ## minlength
 
-A `minlength` rule verifies that the field specified by the `field` property is empty or has a value whose number of characters is larger than or equal to the number specified by the `threshold` property. When there are two or more fields matching the rule, it verifies the total number of characters. Characters are counted as UTF-16 code units.
+A `minlength` rule counts the characters (as UTF-16 code units) in the fields specified by the `field` property. It verifies that the number of characters is zero or a number larger than or equal to the number specified by the `threshold` property.
 
 
 ## maxlength
 
-A `maxlength` rule verifies that the field specified by the `field` property is empty or has a value whose number of characters is smaller than or equal to the number specified by the `threshold` property. When there are two or more fields matching the rule, it verifies the total number of characters. Characters are counted as UTF-16 code units.
+A `maxlength` rule counts the characters (as UTF-16 code units) in the fields specified by the `field` property. It verifies that the number of characters is zero or a number smaller than or equal to the number specified by the `threshold` property.
 
 
 ## minnumber
