@@ -115,14 +115,12 @@ A `stepnumber` rule verifies that the field specified by the `field` property is
 
 ## all
 
-An `all` rule verifies that all of the child rules in the `rules` property are verified. Child rules are evaluated in order from the top, and if one of the rules fails, the iteration will terminate there.
-
-The failed child rule's `error` and `field` properties override the parent's counterparts.
+An `all` rule verifies that all child rules in the `rules` property that match the current context pass validation. Child rules are evaluated in order from the top; if any rule fails, the iteration terminates at that point.
 
 
 ## any
 
-An `any` rule verifies that any of the child rules in the `rules` property are verified. Child rules are evaluated in order from the top, and if one of the rules passes, the iteration will terminate there.
+An `any` rule verifies that at least one child rule in the `rules` property that matches the current context passes validation. Child rules are evaluated in order from the top; if any rule passes, the iteration terminates at that point.
 
 
 # Meta schema
