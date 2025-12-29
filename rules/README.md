@@ -110,9 +110,7 @@ A `maxfilesize` rule verifies that the field specified by the `field` property i
 
 ## stepnumber
 
-A `stepnumber` rule verifies that the field specified by the `field` property is empty or has a numerical value that matches one of the allowed values calculated based on the `base` and `interval` properties. Specifically, when the field value is equal to the base value plus an integral multiple of the interval value, the rule is validated.
-
-Both the `base` and `interval` properties must have an integer or a floating-point number value. The use of an `any` keyword, which HTML supports as the `step` attribute value, is not supported.
+A `stepnumber` rule verifies that the field specified by the `field` property is empty or contains a numerical value that matches one of the allowed values calculated based on the `base` and `interval` properties. Specifically, when the field value equals the base value plus an integral multiple of the interval value, the rule is validated. Both the `base` and `interval` properties must have integer or floating-point values.
 
 
 ## all
