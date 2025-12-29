@@ -60,32 +60,32 @@ The `accept` property accepts an array of ISO 8601 integer values representing t
 
 ## minitems
 
-A `minitems` rule verifies that the number of selected fields (specified by the `field` property) is zero or a number larger than or equal to the number specified by the `threshold` property.
+A `minitems` rule verifies that the number of selected fields (specified by the `field` property) is zero or a number not smaller than the number specified by the `threshold` property.
 
 
 ## maxitems
 
-A `maxitems` rule verifies that the number of selected fields (specified by the `field` property) is zero or a number smaller than or equal to the number specified by the `threshold` property.
+A `maxitems` rule verifies that the number of selected fields (specified by the `field` property) is zero or a number not larger than the number specified by the `threshold` property.
 
 
 ## minlength
 
-A `minlength` rule counts the characters (as UTF-16 code units) in the fields specified by the `field` property. It verifies that the total number of characters is zero or a number larger than or equal to the number specified by the `threshold` property.
+A `minlength` rule counts the characters (as UTF-16 code units) in the fields specified by the `field` property. It verifies that the total number of characters is zero or a number not smaller than the number specified by the `threshold` property.
 
 
 ## maxlength
 
-A `maxlength` rule counts the characters (as UTF-16 code units) in the fields specified by the `field` property. It verifies that the total number of characters is zero or a number smaller than or equal to the number specified by the `threshold` property.
+A `maxlength` rule counts the characters (as UTF-16 code units) in the fields specified by the `field` property. It verifies that the total number of characters is zero or a number not larger than the number specified by the `threshold` property.
 
 
 ## minnumber
 
-A `minnumber` rule verifies that the field specified by the `field` property is empty or contains a numerical value that is equal to or greater than the number specified by the `threshold` property.
+A `minnumber` rule verifies that the field specified by the `field` property is empty or contains a numerical value that is not lower than the number specified by the `threshold` property.
 
 
 ## maxnumber
 
-A `maxnumber` rule verifies that the field specified by the `field` property is empty or contains a numerical value that is equal to or lower than the number specified by the `threshold` property.
+A `maxnumber` rule verifies that the field specified by the `field` property is empty or contains a numerical value that is not greater than the number specified by the `threshold` property.
 
 
 ## mindate
@@ -98,20 +98,14 @@ A `mindate` rule verifies that the field specified by the `field` property is em
 A `maxdate` rule verifies that the field specified by the `field` property is empty or contains a date value that is not later than the date specified by the `threshold` property.
 
 
-
-
-
-
-
-
 ## minfilesize
 
-A `minfilesize` rule verifies that the size of the file object value of the field specified by the `field` property is not smaller than the size specified by the `threshold` property.
+A `minfilesize` rule verifies that the field specified by the `field` property is empty or contains a file object value, and if it's filled, the file size (in bytes) is not smaller than the size specified by the `threshold` property.
 
 
 ## maxfilesize
 
-A `maxfilesize` rule verifies that the size of the file object value of the field specified by the `field` property is not larger than the size specified by the `threshold` property.
+A `maxfilesize` rule verifies that the field specified by the `field` property is empty or contains a file object value, and if it's filled, the file size (in bytes) is not larger than the size specified by the `threshold` property.
 
 
 ## stepnumber
