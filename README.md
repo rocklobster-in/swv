@@ -6,5 +6,5 @@ This is a JavaScript implementation of [Schema-Woven Validation (SWV)](https://c
 ## Installation
 
 ```
-npm install @rocklobsterinc/swv --save
+npm install @rocklobsterinc/swv
 ```
