@@ -13,5 +13,15 @@ export const flattenTree = ( tree ) => {
 		return result;
 	}
 
+	if ( Array.isArray( tree ) ) {
+		const result = [];
+
+		for ( const value of tree ) {
+			result.push( ...flattenTree( value ) );
+		}
+
+		return result;
+	}
+
 	return [ tree ];
 };
