@@ -23,7 +23,7 @@ import { TelRule } from './tel';
 import { TimeRule } from './time';
 import { URLRule } from './url';
 
-export const validators = new Map( [
+export const rules = new Map( [
 	[ 'all', AllRule ],
 	[ 'any', AnyRule ],
 	[ 'date', DateRule ],
