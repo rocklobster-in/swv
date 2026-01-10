@@ -30,11 +30,7 @@ AllRule.prototype.validate = function ( formDataTree, context ) {
 			rule.validate( formDataTree, context );
 		} catch ( error ) {
 			if ( error instanceof Invalidity ) {
-				throw new Invalidity( {
-					...this,
-					field: error.rule.field,
-					error: error.rule.error,
-				}, { cause: error } );
+				throw new Invalidity( this, { cause: error } );
 			} else {
 				throw error;
 			}
