@@ -1,8 +1,18 @@
 
 /**
- * Converts a multi-layered map to a flat array.
+ * Converts a multi-layered object to a flat array.
  */
 export const flattenTree = ( tree ) => {
+	if ( Object === tree.constructor ) {
+		const result = [];
+
+		for ( const value of Object.values( tree ) ) {
+			result.push( ...flattenTree( value ) );
+		}
+
+		return result;
+	}
+
 	if ( tree instanceof Map ) {
 		const result = [];
 
