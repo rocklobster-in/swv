@@ -1,11 +1,11 @@
 import { AbstractRule } from './abstract-rule';
 
-export function CompositeRule() {}
+export function CompositeRule() {
+	this.rules = [];
+}
 
 
 CompositeRule.prototype = {
-
-	rules: [],
 
 	addRule( rule ) {
 		if ( ! ( rule instanceof AbstractRule ) ) {
