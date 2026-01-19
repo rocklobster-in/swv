@@ -6,6 +6,8 @@ import { InvalidityException as Invalidity } from '../invalidity-exception';
 import { flattenTree } from '../helpers';
 
 export function MinNumberRule( properties ) {
+	AbstractRule.call( this );
+
 	this.field = properties.field;
 	this.error = properties.error;
 	this.threshold = properties.threshold;

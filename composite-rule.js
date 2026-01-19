@@ -1,6 +1,8 @@
 import { AbstractRule } from './abstract-rule';
 
 export function CompositeRule() {
+	AbstractRule.call( this );
+
 	this.rules = [];
 }
 

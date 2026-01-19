@@ -5,6 +5,8 @@ import { InvalidityException as Invalidity } from '../invalidity-exception';
 import { flattenTree } from '../helpers';
 
 export function FileRule( properties ) {
+	AbstractRule.call( this );
+
 	this.field = properties.field;
 	this.error = properties.error;
 	this.accept = properties.accept;

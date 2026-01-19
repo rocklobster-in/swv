@@ -4,7 +4,7 @@ import { CompositeRule } from '../composite-rule';
 import { InvalidityException as Invalidity } from '../invalidity-exception';
 
 export function AllRule( properties ) {
-	CompositeRule.call( this, properties );
+	CompositeRule.call( this );
 
 	this.field = properties.field;
 	this.error = properties.error;
