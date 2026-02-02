@@ -6,6 +6,20 @@ export function InvalidityException( rule, options = {} ) {
 	this.rule = rule;
 }
 
-InvalidityException.prototype.name = 'InvalidityException';
+InvalidityException.prototype = {
+
+	get name() {
+		return 'InvalidityException';
+	},
+
+	get message() {
+		return this.cause?.error ?? this.rule.error ?? '';
+	},
+
+	get field() {
+		return this.cause?.field ?? this.rule.field ?? '';
+	},
+
+};
 
 Object.setPrototypeOf( InvalidityException.prototype, Error.prototype );
