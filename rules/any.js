@@ -12,6 +12,20 @@ export function AnyRule( properties ) {
 
 AnyRule.RULE_NAME = 'any';
 
+AnyRule.prototype = {
+
+	/**
+	 * Validates the form data according to the logic defined by the rule.
+	 *
+	 * @param {Object} formDataTree - FormDataTree object to validate.
+	 * @param {Object} context - Optional context.
+	 */
+	validate( formDataTree, context ) {
+
+	},
+
+};
+
 Object.setPrototypeOf( AnyRule.prototype, CompositeRule.prototype );
 
 

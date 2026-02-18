@@ -14,6 +14,20 @@ export function FileRule( properties ) {
 
 FileRule.RULE_NAME = 'file';
 
+FileRule.prototype = {
+
+	/**
+	 * Validates the form data according to the logic defined by the rule.
+	 *
+	 * @param {Object} formDataTree - FormDataTree object to validate.
+	 * @param {Object} context - Optional context.
+	 */
+	validate( formDataTree, context ) {
+
+	},
+
+};
+
 Object.setPrototypeOf( FileRule.prototype, AbstractRule.prototype );
 
 

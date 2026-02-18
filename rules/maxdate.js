@@ -15,6 +15,20 @@ export function MaxDateRule( properties ) {
 
 MaxDateRule.RULE_NAME = 'maxdate';
 
+MaxDateRule.prototype = {
+
+	/**
+	 * Validates the form data according to the logic defined by the rule.
+	 *
+	 * @param {Object} formDataTree - FormDataTree object to validate.
+	 * @param {Object} context - Optional context.
+	 */
+	validate( formDataTree, context ) {
+
+	},
+
+};
+
 Object.setPrototypeOf( MaxDateRule.prototype, AbstractRule.prototype );
 
 

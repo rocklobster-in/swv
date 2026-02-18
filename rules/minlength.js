@@ -14,6 +14,20 @@ export function MinLengthRule( properties ) {
 
 MinLengthRule.RULE_NAME = 'minlength';
 
+MinLengthRule.prototype = {
+
+	/**
+	 * Validates the form data according to the logic defined by the rule.
+	 *
+	 * @param {Object} formDataTree - FormDataTree object to validate.
+	 * @param {Object} context - Optional context.
+	 */
+	validate( formDataTree, context ) {
+
+	},
+
+};
+
 Object.setPrototypeOf( MinLengthRule.prototype, AbstractRule.prototype );
 
 

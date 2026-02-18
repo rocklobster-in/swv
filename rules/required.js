@@ -13,6 +13,20 @@ export function RequiredRule( properties ) {
 
 RequiredRule.RULE_NAME = 'required';
 
+RequiredRule.prototype = {
+
+	/**
+	 * Validates the form data according to the logic defined by the rule.
+	 *
+	 * @param {Object} formDataTree - FormDataTree object to validate.
+	 * @param {Object} context - Optional context.
+	 */
+	validate( formDataTree, context ) {
+
+	},
+
+};
+
 Object.setPrototypeOf( RequiredRule.prototype, AbstractRule.prototype );
 
 

@@ -13,6 +13,20 @@ export function URLRule( properties ) {
 
 URLRule.RULE_NAME = 'url';
 
+URLRule.prototype = {
+
+	/**
+	 * Validates the form data according to the logic defined by the rule.
+	 *
+	 * @param {Object} formDataTree - FormDataTree object to validate.
+	 * @param {Object} context - Optional context.
+	 */
+	validate( formDataTree, context ) {
+
+	},
+
+};
+
 Object.setPrototypeOf( URLRule.prototype, AbstractRule.prototype );
 
 

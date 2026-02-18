@@ -14,6 +14,20 @@ export function MaxLengthRule( properties ) {
 
 MaxLengthRule.RULE_NAME = 'maxlength';
 
+MaxLengthRule.prototype = {
+
+	/**
+	 * Validates the form data according to the logic defined by the rule.
+	 *
+	 * @param {Object} formDataTree - FormDataTree object to validate.
+	 * @param {Object} context - Optional context.
+	 */
+	validate( formDataTree, context ) {
+
+	},
+
+};
+
 Object.setPrototypeOf( MaxLengthRule.prototype, AbstractRule.prototype );
 
 
