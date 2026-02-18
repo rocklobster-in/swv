@@ -24,31 +24,21 @@ MaxDateRule.prototype = {
 	 * @param {Object} context - Optional context.
 	 */
 	validate( formDataTree, context ) {
+		const values = flattenTree( formDataTree.getAll( this.field ) );
 
+		if ( ! values.length || ! DateRule.isDate( this.threshold ) ) {
+			return true;
+		}
+
+		for ( const value of values ) {
+			if ( DateRule.isDate( value ) && this.threshold < value ) {
+				throw new Invalidity( this, { cause: value } );
+			}
+		}
+
+		return true;
 	},
 
 };
 
 Object.setPrototypeOf( MaxDateRule.prototype, AbstractRule.prototype );
-
-
-/**
- * Validates the form data according to the logic defined by the rule.
- *
- * @param {Object} formDataTree - FormDataTree object to validate.
- */
-MaxDateRule.prototype.validate = function ( formDataTree, context ) {
-	const values = flattenTree( formDataTree.getAll( this.field ) );
-
-	if ( ! values.length || ! DateRule.isDate( this.threshold ) ) {
-		return true;
-	}
-
-	for ( const value of values ) {
-		if ( DateRule.isDate( value ) && this.threshold < value ) {
-			throw new Invalidity( this, { cause: value } );
-		}
-	}
-
-	return true;
-}

@@ -23,35 +23,25 @@ MinLengthRule.prototype = {
 	 * @param {Object} context - Optional context.
 	 */
 	validate( formDataTree, context ) {
+		const values = flattenTree( formDataTree.getAll( this.field ) );
 
+		if ( ! values.length ) {
+			return true;
+		}
+
+		const threshold = parseInt( this.threshold );
+
+		const totalLength = values.reduce( ( accumulator, current ) => {
+			return accumulator + current.length;
+		}, 0 );
+
+		if ( ! Number.isNaN( threshold ) && totalLength < threshold ) {
+			throw new Invalidity( this, { cause: totalLength } );
+		}
+
+		return true;
 	},
 
 };
 
 Object.setPrototypeOf( MinLengthRule.prototype, AbstractRule.prototype );
-
-
-/**
- * Validates the form data according to the logic defined by the rule.
- *
- * @param {Object} formDataTree - FormDataTree object to validate.
- */
-MinLengthRule.prototype.validate = function ( formDataTree, context ) {
-	const values = flattenTree( formDataTree.getAll( this.field ) );
-
-	if ( ! values.length ) {
-		return true;
-	}
-
-	const threshold = parseInt( this.threshold );
-
-	const totalLength = values.reduce( ( accumulator, current ) => {
-		return accumulator + current.length;
-	}, 0 );
-
-	if ( ! Number.isNaN( threshold ) && totalLength < threshold ) {
-		throw new Invalidity( this, { cause: totalLength } );
-	}
-
-	return true;
-}

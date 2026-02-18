@@ -22,25 +22,15 @@ RequiredRule.prototype = {
 	 * @param {Object} context - Optional context.
 	 */
 	validate( formDataTree, context ) {
+		const values = flattenTree( formDataTree.getAll( this.field ) );
 
+		if ( ! values.length ) {
+			throw new Invalidity( this );
+		}
+
+		return true;
 	},
 
 };
 
 Object.setPrototypeOf( RequiredRule.prototype, AbstractRule.prototype );
-
-
-/**
- * Validates the form data according to the logic defined by the rule.
- *
- * @param {Object} formDataTree - FormDataTree object to validate.
- */
-RequiredRule.prototype.validate = function ( formDataTree, context ) {
-	const values = flattenTree( formDataTree.getAll( this.field ) );
-
-	if ( ! values.length ) {
-		throw new Invalidity( this );
-	}
-
-	return true;
-}

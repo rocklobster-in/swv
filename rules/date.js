@@ -22,7 +22,19 @@ DateRule.prototype = {
 	 * @param {Object} context - Optional context.
 	 */
 	validate( formDataTree, context ) {
+		const values = flattenTree( formDataTree.getAll( this.field ) );
 
+		if ( ! values.length ) {
+			return true;
+		}
+
+		for ( const value of values ) {
+			if ( ! DateRule.isDate( value ) ) {
+				throw new Invalidity( this, { cause: value } );
+			}
+		}
+
+		return true;
 	},
 
 };
@@ -45,25 +57,3 @@ DateRule.isDate = text => {
 
 	return ! Number.isNaN( date.valueOf() );
 };
-
-
-/**
- * Validates the form data according to the logic defined by the rule.
- *
- * @param {Object} formDataTree - FormDataTree object to validate.
- */
-DateRule.prototype.validate = function ( formDataTree, context ) {
-	const values = flattenTree( formDataTree.getAll( this.field ) );
-
-	if ( ! values.length ) {
-		return true;
-	}
-
-	for ( const value of values ) {
-		if ( ! DateRule.isDate( value ) ) {
-			throw new Invalidity( this, { cause: value } );
-		}
-	}
-
-	return true;
-}

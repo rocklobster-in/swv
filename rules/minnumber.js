@@ -24,37 +24,27 @@ MinNumberRule.prototype = {
 	 * @param {Object} context - Optional context.
 	 */
 	validate( formDataTree, context ) {
+		const values = flattenTree( formDataTree.getAll( this.field ) );
 
+		if ( ! values.length ) {
+			return true;
+		}
+
+		const threshold = parseFloat( this.threshold );
+
+		if ( Number.isNaN( threshold ) ) {
+			return true;
+		}
+
+		for ( const value of values ) {
+			if ( NumberRule.isNumber( value ) && parseFloat( value ) < threshold ) {
+				throw new Invalidity( this, { cause: value } );
+			}
+		}
+
+		return true;
 	},
 
 };
 
 Object.setPrototypeOf( MinNumberRule.prototype, AbstractRule.prototype );
-
-
-/**
- * Validates the form data according to the logic defined by the rule.
- *
- * @param {Object} formDataTree - FormDataTree object to validate.
- */
-MinNumberRule.prototype.validate = function ( formDataTree, context ) {
-	const values = flattenTree( formDataTree.getAll( this.field ) );
-
-	if ( ! values.length ) {
-		return true;
-	}
-
-	const threshold = parseFloat( this.threshold );
-
-	if ( Number.isNaN( threshold ) ) {
-		return true;
-	}
-
-	for ( const value of values ) {
-		if ( NumberRule.isNumber( value ) && parseFloat( value ) < threshold ) {
-			throw new Invalidity( this, { cause: value } );
-		}
-	}
-
-	return true;
-}

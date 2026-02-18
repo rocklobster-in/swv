@@ -23,7 +23,36 @@ FileRule.prototype = {
 	 * @param {Object} context - Optional context.
 	 */
 	validate( formDataTree, context ) {
+		const files = flattenTree( formDataTree.getAllFiles( this.field ) );
 
+		if ( ! files.length ) {
+			return true;
+		}
+
+		const isAcceptableFile = file => {
+			if ( file instanceof File ) {
+				return this.accept?.some( fileType => {
+					if ( /^\.[a-z0-9]+$/i.test( fileType ) ) {
+						return file.name.toLowerCase().endsWith( fileType.toLowerCase() );
+					} else {
+						return FileRule.convertMimeToExt( fileType ).some( ext => {
+							ext = '.' + ext.trim();
+							return file.name.toLowerCase().endsWith( ext.toLowerCase() );
+						} );
+					}
+				} );
+			}
+
+			return false;
+		};
+
+		for ( const file of files ) {
+			if ( ! isAcceptableFile( file ) ) {
+				throw new Invalidity( this, { cause: file } );
+			}
+		}
+
+		return true;
 	},
 
 };
@@ -464,42 +493,3 @@ FileRule.convertMimeToExt = mime => {
 
 	return results;
 };
-
-
-/**
- * Validates the form data according to the logic defined by the rule.
- *
- * @param {Object} formDataTree - FormDataTree object to validate.
- */
-FileRule.prototype.validate = function ( formDataTree, context ) {
-	const files = flattenTree( formDataTree.getAllFiles( this.field ) );
-
-	if ( ! files.length ) {
-		return true;
-	}
-
-	const isAcceptableFile = file => {
-		if ( file instanceof File ) {
-			return this.accept?.some( fileType => {
-				if ( /^\.[a-z0-9]+$/i.test( fileType ) ) {
-					return file.name.toLowerCase().endsWith( fileType.toLowerCase() );
-				} else {
-					return FileRule.convertMimeToExt( fileType ).some( ext => {
-						ext = '.' + ext.trim();
-						return file.name.toLowerCase().endsWith( ext.toLowerCase() );
-					} );
-				}
-			} );
-		}
-
-		return false;
-	};
-
-	for ( const file of files ) {
-		if ( ! isAcceptableFile( file ) ) {
-			throw new Invalidity( this, { cause: file } );
-		}
-	}
-
-	return true;
-}

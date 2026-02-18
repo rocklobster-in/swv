@@ -22,7 +22,19 @@ TelRule.prototype = {
 	 * @param {Object} context - Optional context.
 	 */
 	validate( formDataTree, context ) {
+		const values = flattenTree( formDataTree.getAll( this.field ) );
 
+		if ( ! values.length ) {
+			return true;
+		}
+
+		for ( const value of values ) {
+			if ( ! TelRule.isTel( value ) ) {
+				throw new Invalidity( this, { cause: value } );
+			}
+		}
+
+		return true;
 	},
 
 };
@@ -55,25 +67,3 @@ TelRule.isTel = text => {
 
 	return true;
 };
-
-
-/**
- * Validates the form data according to the logic defined by the rule.
- *
- * @param {Object} formDataTree - FormDataTree object to validate.
- */
-TelRule.prototype.validate = function ( formDataTree, context ) {
-	const values = flattenTree( formDataTree.getAll( this.field ) );
-
-	if ( ! values.length ) {
-		return true;
-	}
-
-	for ( const value of values ) {
-		if ( ! TelRule.isTel( value ) ) {
-			throw new Invalidity( this, { cause: value } );
-		}
-	}
-
-	return true;
-}

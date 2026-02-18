@@ -22,25 +22,15 @@ RequiredFileRule.prototype = {
 	 * @param {Object} context - Optional context.
 	 */
 	validate( formDataTree, context ) {
+		const files = flattenTree( formDataTree.getAllFiles( this.field ) );
 
+		if ( ! files.length ) {
+			throw new Invalidity( this );
+		}
+
+		return true;
 	},
 
 };
 
 Object.setPrototypeOf( RequiredFileRule.prototype, AbstractRule.prototype );
-
-
-/**
- * Validates the form data according to the logic defined by the rule.
- *
- * @param {Object} formDataTree - FormDataTree object to validate.
- */
-RequiredFileRule.prototype.validate = function ( formDataTree, context ) {
-	const files = flattenTree( formDataTree.getAllFiles( this.field ) );
-
-	if ( ! files.length ) {
-		throw new Invalidity( this );
-	}
-
-	return true;
-}

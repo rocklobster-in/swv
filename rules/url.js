@@ -22,7 +22,19 @@ URLRule.prototype = {
 	 * @param {Object} context - Optional context.
 	 */
 	validate( formDataTree, context ) {
+		const values = flattenTree( formDataTree.getAll( this.field ) );
 
+		if ( ! values.length ) {
+			return true;
+		}
+
+		for ( const value of values ) {
+			if ( ! URLRule.isUrl( value ) ) {
+				throw new Invalidity( this, { cause: value } );
+			}
+		}
+
+		return true;
 	},
 
 };
@@ -46,25 +58,3 @@ URLRule.isUrl = text => {
 		return false;
 	}
 };
-
-
-/**
- * Validates the form data according to the logic defined by the rule.
- *
- * @param {Object} formDataTree - FormDataTree object to validate.
- */
-URLRule.prototype.validate = function ( formDataTree, context ) {
-	const values = flattenTree( formDataTree.getAll( this.field ) );
-
-	if ( ! values.length ) {
-		return true;
-	}
-
-	for ( const value of values ) {
-		if ( ! URLRule.isUrl( value ) ) {
-			throw new Invalidity( this, { cause: value } );
-		}
-	}
-
-	return true;
-}
