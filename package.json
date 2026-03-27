@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/rocklobster-in/swv#readme",
   "dependencies": {
-    "@rocklobsterinc/form-data-tree": "^2.0.0",
+    "@rocklobsterinc/form-data-tree": "^2.1.0",
     "@rocklobsterinc/functions": "^1.0.0"
   }
 }
