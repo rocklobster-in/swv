@@ -1,8 +1,9 @@
 import FormDataTree from '@rocklobsterinc/form-data-tree';
 
+import { flatten } from '@rocklobsterinc/functions';
+
 import { AbstractRule } from '../abstract-rule';
 import { InvalidityException as Invalidity } from '../invalidity-exception';
-import { flattenTree } from '../helpers';
 
 export function MaxFilesizeRule( properties ) {
 	AbstractRule.call( this );
@@ -23,7 +24,7 @@ MaxFilesizeRule.prototype = {
 	 * @param {Object} context - Optional context.
 	 */
 	validate( formDataTree, context ) {
-		const files = flattenTree( formDataTree.getAllFiles( this.field ) );
+		const files = flatten( formDataTree.getAllFiles( this.field ) );
 
 		if ( ! files.length ) {
 			return true;

@@ -1,9 +1,10 @@
 import FormDataTree from '@rocklobsterinc/form-data-tree';
 
+import { flatten } from '@rocklobsterinc/functions';
+
 import { NumberRule } from './number';
 import { AbstractRule } from '../abstract-rule';
 import { InvalidityException as Invalidity } from '../invalidity-exception';
-import { flattenTree } from '../helpers';
 
 export function MinNumberRule( properties ) {
 	AbstractRule.call( this );
@@ -24,7 +25,7 @@ MinNumberRule.prototype = {
 	 * @param {Object} context - Optional context.
 	 */
 	validate( formDataTree, context ) {
-		const values = flattenTree( formDataTree.getAll( this.field ) );
+		const values = flatten( formDataTree.getAll( this.field ) );
 
 		if ( ! values.length ) {
 			return true;
