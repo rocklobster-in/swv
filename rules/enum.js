@@ -1,14 +1,44 @@
-import { ValidationError } from '../error';
+import FormDataTree from '@rocklobsterinc/form-data-tree';
 
-export const enumeration = function ( formDataTree ) {
-	const values = formDataTree.getAll( this.field )
-		.map( val => val.trim() ).filter( val => '' !== val );
+import { flatten } from '@rocklobsterinc/functions';
 
-	const isAcceptableValue = value => this.accept?.some(
-		acceptableValue => value === String( acceptableValue )
-	);
+import { AbstractRule } from '../abstract-rule';
+import { InvalidityException as Invalidity } from '../invalidity-exception';
 
-	if ( ! values.every( isAcceptableValue ) ) {
-		throw new ValidationError( this );
-	}
+export function EnumRule( properties ) {
+	AbstractRule.call( this );
+
+	this.field = properties.field;
+	this.error = properties.error;
+	this.accept = properties.accept;
+}
+
+EnumRule.RULE_NAME = 'enum';
+
+EnumRule.prototype = {
+
+	/**
+	 * Validates the form data according to the logic defined by the rule.
+	 *
+	 * @param {Object} formDataTree - FormDataTree object to validate.
+	 * @param {Object} context - Optional context.
+	 */
+	validate( formDataTree, context ) {
+		const values = flatten( formDataTree.getAll( this.field ) );
+
+		if ( ! values.length ) {
+			return true;
+		}
+
+		for ( const value of values ) {
+			if ( ! this.accept?.map( String ).includes( value ) ) {
+				throw new Invalidity( this, { cause: value } );
+			}
+		}
+
+		return true;
+	},
+
 };
+
+Object.setPrototypeOf( EnumRule.prototype, AbstractRule.prototype );

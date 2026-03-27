@@ -1,27 +1,61 @@
-import { ValidationError } from '../error';
+import FormDataTree from '@rocklobsterinc/form-data-tree';
 
-export const url = function ( formDataTree ) {
-	const values = formDataTree.getAll( this.field )
-		.map( val => val.trim() ).filter( val => '' !== val );
+import { flatten } from '@rocklobsterinc/functions';
 
-	const isAbsoluteUrl = text => {
-		try {
-			const urlObj = new URL( text );
-			const protocol = urlObj.protocol.replace( /:$/, '' );
-			return isAllowedProtocol( protocol );
-		} catch {
-			return false;
+import { AbstractRule } from '../abstract-rule';
+import { InvalidityException as Invalidity } from '../invalidity-exception';
+
+export function URLRule( properties ) {
+	AbstractRule.call( this );
+
+	this.field = properties.field;
+	this.error = properties.error;
+}
+
+URLRule.RULE_NAME = 'url';
+
+URLRule.prototype = {
+
+	/**
+	 * Validates the form data according to the logic defined by the rule.
+	 *
+	 * @param {Object} formDataTree - FormDataTree object to validate.
+	 * @param {Object} context - Optional context.
+	 */
+	validate( formDataTree, context ) {
+		const values = flatten( formDataTree.getAll( this.field ) );
+
+		if ( ! values.length ) {
+			return true;
 		}
-	};
 
-	const isAllowedProtocol = protocol => {
-		// https://developer.wordpress.org/reference/functions/wp_allowed_protocols/
-		const allowedProtocols = [ 'http', 'https', 'ftp', 'ftps', 'mailto', 'news', 'irc', 'irc6', 'ircs', 'gopher', 'nntp', 'feed', 'telnet', 'mms', 'rtsp', 'sms', 'svn', 'tel', 'fax', 'xmpp', 'webcal', 'urn' ];
+		for ( const value of values ) {
+			if ( ! URLRule.isUrl( value ) ) {
+				throw new Invalidity( this, { cause: value } );
+			}
+		}
 
-		return -1 !== allowedProtocols.indexOf( protocol );
-	};
+		return true;
+	},
 
-	if ( ! values.every( isAbsoluteUrl ) ) {
-		throw new ValidationError( this );
+};
+
+Object.setPrototypeOf( URLRule.prototype, AbstractRule.prototype );
+
+
+/**
+ * Returns true if the given string is a well-formed URL.
+ *
+ * @param {string} text - String to check.
+ */
+URLRule.isUrl = text => {
+	const allowedProtocols = [ 'http', 'https' ];
+
+	try {
+		const urlObj = new URL( text );
+		const protocol = urlObj.protocol.replace( /:$/, '' );
+		return allowedProtocols.includes( protocol );
+	} catch {
+		return false;
 	}
 };

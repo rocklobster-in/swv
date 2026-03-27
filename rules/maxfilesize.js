@@ -1,17 +1,52 @@
-import { ValidationError } from '../error';
+import FormDataTree from '@rocklobsterinc/form-data-tree';
 
-export const maxfilesize = function ( formDataTree ) {
-	const values = formDataTree.getAll( this.field );
+import { flatten } from '@rocklobsterinc/functions';
 
-	let totalVolume = 0;
+import { AbstractRule } from '../abstract-rule';
+import { InvalidityException as Invalidity } from '../invalidity-exception';
 
-	values.forEach( file => {
-		if ( file instanceof File ) {
-			totalVolume += file.size;
+export function MaxFilesizeRule( properties ) {
+	AbstractRule.call( this );
+
+	this.field = properties.field;
+	this.error = properties.error;
+	this.threshold = properties.threshold;
+}
+
+MaxFilesizeRule.RULE_NAME = 'maxfilesize';
+
+MaxFilesizeRule.prototype = {
+
+	/**
+	 * Validates the form data according to the logic defined by the rule.
+	 *
+	 * @param {Object} formDataTree - FormDataTree object to validate.
+	 * @param {Object} context - Optional context.
+	 */
+	validate( formDataTree, context ) {
+		const files = flatten( formDataTree.getAllFiles( this.field ) );
+
+		if ( ! files.length ) {
+			return true;
 		}
-	} );
 
-	if ( parseInt( this.threshold ) < totalVolume ) {
-		throw new ValidationError( this );
-	}
+		const threshold = parseInt( this.threshold );
+
+		const totalVolume = files.reduce( ( accumulator, current ) => {
+			if ( current instanceof File ) {
+				accumulator += current.size;
+			}
+
+			return accumulator;
+		}, 0 );
+
+		if ( ! Number.isNaN( threshold ) && threshold < totalVolume ) {
+			throw new Invalidity( this, { cause: totalVolume } );
+		}
+
+		return true;
+	},
+
 };
+
+Object.setPrototypeOf( MaxFilesizeRule.prototype, AbstractRule.prototype );

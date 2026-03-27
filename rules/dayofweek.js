@@ -1,21 +1,49 @@
-import { ValidationError } from '../error';
+import FormDataTree from '@rocklobsterinc/form-data-tree';
 
-export const dayofweek = function ( formDataTree ) {
-	const values = formDataTree.getAll( this.field )
-		.map( val => val.trim() ).filter( val => '' !== val );
+import { flatten } from '@rocklobsterinc/functions';
 
-	const convertToIso8601 = jsDow => ( 0 === jsDow ) ? 7 : jsDow;
+import { AbstractRule } from '../abstract-rule';
+import { InvalidityException as Invalidity } from '../invalidity-exception';
 
-	const isAcceptableValue = value => {
-		const date = new Date( value );
-		const day = convertToIso8601( date.getDay() );
+export function DayofweekRule( properties ) {
+	AbstractRule.call( this );
 
-		return this.accept?.some(
-			acceptableValue => day === parseInt( acceptableValue )
-		);
-	};
+	this.field = properties.field;
+	this.error = properties.error;
+	this.accept = properties.accept;
+}
 
-	if ( ! values.every( isAcceptableValue ) ) {
-		throw new ValidationError( this );
-	}
+DayofweekRule.RULE_NAME = 'dayofweek';
+
+DayofweekRule.prototype = {
+
+	/**
+	 * Validates the form data according to the logic defined by the rule.
+	 *
+	 * @param {Object} formDataTree - FormDataTree object to validate.
+	 * @param {Object} context - Optional context.
+	 */
+	validate( formDataTree, context ) {
+		const values = flatten( formDataTree.getAll( this.field ) );
+
+		if ( ! values.length ) {
+			return true;
+		}
+
+		const convertToIso8601 = jsDow => ( 0 === jsDow ) ? 7 : jsDow;
+
+		for ( const value of values ) {
+			const date = new Date( value );
+			const day = convertToIso8601( date.getDay() );
+
+			if ( ! this.accept?.map( String ).includes( String( day ) ) ) {
+				throw new Invalidity( this, { cause: value } );
+			}
+		}
+
+		return true;
+	},
+
 };
+
+Object.setPrototypeOf( DayofweekRule.prototype, AbstractRule.prototype );

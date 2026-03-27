@@ -1,30 +1,65 @@
-import { ValidationError } from '../error';
+import FormDataTree from '@rocklobsterinc/form-data-tree';
 
-export const stepnumber = function ( formDataTree ) {
-	const values = formDataTree.getAll( this.field )
-		.map( val => val.trim() ).filter( val => '' !== val );
+import { flatten } from '@rocklobsterinc/functions';
 
-	const base = parseFloat( this.base );
-	const interval = parseFloat( this.interval );
+import { AbstractRule } from '../abstract-rule';
+import { InvalidityException as Invalidity } from '../invalidity-exception';
 
-	if ( ! ( 0 < interval ) ) {
-		return true;
-	}
+export function StepNumberRule( properties ) {
+	AbstractRule.call( this );
 
-	const matchesStep = text => {
-		const remainder = ( parseFloat( text ) - base ) % interval;
+	this.field = properties.field;
+	this.error = properties.error;
+	this.base = properties.base;
+	this.interval = properties.interval;
+}
 
-		if (
-			'0.000000' === Math.abs( remainder ).toFixed( 6 ) ||
-			'0.000000' === Math.abs( remainder - interval ).toFixed( 6 )
-		) {
+StepNumberRule.RULE_NAME = 'stepnumber';
+
+StepNumberRule.prototype = {
+
+	/**
+	 * Validates the form data according to the logic defined by the rule.
+	 *
+	 * @param {Object} formDataTree - FormDataTree object to validate.
+	 * @param {Object} context - Optional context.
+	 */
+	validate( formDataTree, context ) {
+		const values = flatten( formDataTree.getAll( this.field ) );
+
+		if ( ! values.length ) {
 			return true;
 		}
 
-		return false;
-	};
+		const base = parseFloat( this.base );
+		const interval = parseFloat( this.interval );
 
-	if ( ! values.every( matchesStep ) ) {
-		throw new ValidationError( this );
-	}
+		if ( ! ( 0 < interval ) ) {
+			return true;
+		}
+
+		const matchesStep = text => {
+			const remainder = ( parseFloat( text ) - base ) % interval;
+
+			if (
+				'0.000000' === Math.abs( remainder ).toFixed( 6 ) ||
+				'0.000000' === Math.abs( remainder - interval ).toFixed( 6 )
+			) {
+				return true;
+			}
+
+			return false;
+		};
+
+		for ( const value of values ) {
+			if ( ! matchesStep( value ) ) {
+				throw new Invalidity( this, { cause: value } );
+			}
+		}
+
+		return true;
+	},
+
 };
+
+Object.setPrototypeOf( StepNumberRule.prototype, AbstractRule.prototype );

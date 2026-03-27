@@ -1,18 +1,48 @@
-import { ValidationError } from '../error';
+import FormDataTree from '@rocklobsterinc/form-data-tree';
 
-export const maxlength = function ( formDataTree ) {
-	const values = formDataTree.getAll( this.field )
-		.map( val => val.trim() ).filter( val => '' !== val );
+import { flatten } from '@rocklobsterinc/functions';
 
-	let totalLength = 0;
+import { AbstractRule } from '../abstract-rule';
+import { InvalidityException as Invalidity } from '../invalidity-exception';
 
-	values.forEach( text => {
-		if ( 'string' === typeof text ) {
-			totalLength += text.length;
+export function MaxLengthRule( properties ) {
+	AbstractRule.call( this );
+
+	this.field = properties.field;
+	this.error = properties.error;
+	this.threshold = properties.threshold;
+}
+
+MaxLengthRule.RULE_NAME = 'maxlength';
+
+MaxLengthRule.prototype = {
+
+	/**
+	 * Validates the form data according to the logic defined by the rule.
+	 *
+	 * @param {Object} formDataTree - FormDataTree object to validate.
+	 * @param {Object} context - Optional context.
+	 */
+	validate( formDataTree, context ) {
+		const values = flatten( formDataTree.getAll( this.field ) );
+
+		if ( ! values.length ) {
+			return true;
 		}
-	} );
 
-	if ( parseInt( this.threshold ) < totalLength ) {
-		throw new ValidationError( this );
-	}
+		const threshold = parseInt( this.threshold );
+
+		const totalLength = values.reduce( ( accumulator, current ) => {
+			return accumulator + current.length;
+		}, 0 );
+
+		if ( ! Number.isNaN( threshold ) && threshold < totalLength ) {
+			throw new Invalidity( this, { cause: totalLength } );
+		}
+
+		return true;
+	},
+
 };
+
+Object.setPrototypeOf( MaxLengthRule.prototype, AbstractRule.prototype );

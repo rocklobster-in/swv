@@ -1,9 +1,37 @@
-import { ValidationError } from '../error';
+import FormDataTree from '@rocklobsterinc/form-data-tree';
 
-export const requiredfile = function ( formDataTree ) {
-	const values = formDataTree.getAll( this.field );
+import { flatten } from '@rocklobsterinc/functions';
 
-	if ( 0 === values.length ) {
-		throw new ValidationError( this );
-	}
+import { AbstractRule } from '../abstract-rule';
+import { InvalidityException as Invalidity } from '../invalidity-exception';
+
+export function RequiredFileRule( properties ) {
+	AbstractRule.call( this );
+
+	this.field = properties.field;
+	this.error = properties.error;
+}
+
+RequiredFileRule.RULE_NAME = 'requiredfile';
+
+RequiredFileRule.prototype = {
+
+	/**
+	 * Validates the form data according to the logic defined by the rule.
+	 *
+	 * @param {Object} formDataTree - FormDataTree object to validate.
+	 * @param {Object} context - Optional context.
+	 */
+	validate( formDataTree, context ) {
+		const files = flatten( formDataTree.getAllFiles( this.field ) );
+
+		if ( ! files.length ) {
+			throw new Invalidity( this );
+		}
+
+		return true;
+	},
+
 };
+
+Object.setPrototypeOf( RequiredFileRule.prototype, AbstractRule.prototype );

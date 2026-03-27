@@ -1,29 +1,58 @@
-import { ruleMatches, defaultRuleHandler } from '../rule-handler';
-import { applyMiddlewares } from '../middleware';
-import { ValidationError } from '../error';
+import FormDataTree from '@rocklobsterinc/form-data-tree';
 
-export const any = function ( formDataTree, options = {} ) {
-	const rules = ( this.rules ?? [] ).filter(
-		ruleObj => ruleMatches( { ruleObj, options } )
-	);
+import { CompositeRule } from '../composite-rule';
+import { InvalidityException as Invalidity } from '../invalidity-exception';
 
-	const enhancedRuleHandler = applyMiddlewares( defaultRuleHandler );
+export function AnyRule( properties ) {
+	CompositeRule.call( this );
 
-	const result = rules.some( ruleObj => {
-		try {
-			enhancedRuleHandler( { ruleObj, formDataTree, options } );
-		} catch ( error ) {
-			if ( ! ( error instanceof ValidationError ) ) {
-				throw error;
+	this.field = properties.field;
+	this.error = properties.error;
+}
+
+AnyRule.RULE_NAME = 'any';
+
+AnyRule.prototype = {
+
+	/**
+	 * Validates the form data according to the logic defined by the rule.
+	 *
+	 * @param {Object} formDataTree - FormDataTree object to validate.
+	 * @param {Object} context - Optional context.
+	 */
+	validate( formDataTree, context ) {
+		const rules = ( this.rules ?? [] ).filter( rule => rule.matches( context ) );
+
+		if ( ! rules.length ) {
+			return true;
+		}
+
+		let isValid = null;
+
+		for ( const rule of rules ) {
+			try {
+				isValid = true;
+				rule.validate( formDataTree, context );
+			} catch ( error ) {
+				if ( error instanceof Invalidity ) {
+					isValid = false;
+				} else {
+					throw error;
+				}
 			}
 
-			return false;
+			if ( isValid ) {
+				break;
+			}
+		}
+
+		if ( false === isValid ) {
+			throw new Invalidity( this );
 		}
 
 		return true;
-	} );
+	},
 
-	if ( ! result ) {
-		throw new ValidationError( this );
-	}
 };
+
+Object.setPrototypeOf( AnyRule.prototype, CompositeRule.prototype );
