@@ -19,5 +19,8 @@
   "dependencies": {
     "@rocklobsterinc/form-data-tree": "^2.1.0",
     "@rocklobsterinc/functions": "^1.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^11.7.6"
   }
 }
