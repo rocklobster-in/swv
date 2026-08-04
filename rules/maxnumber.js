@@ -1,51 +1,49 @@
-import FormDataTree from '@rocklobsterinc/form-data-tree';
+import FormDataTree from "@rocklobsterinc/form-data-tree";
 
-import { flatten } from '@rocklobsterinc/functions';
+import { flatten } from "@rocklobsterinc/functions";
 
-import { NumberRule } from './number';
-import { AbstractRule } from '../abstract-rule';
-import { InvalidityException as Invalidity } from '../invalidity-exception';
+import { NumberRule } from "./number";
+import { AbstractRule } from "../abstract-rule";
+import { InvalidityException as Invalidity } from "../invalidity-exception";
 
-export function MaxNumberRule( properties ) {
-	AbstractRule.call( this );
+export function MaxNumberRule(properties) {
+  AbstractRule.call(this);
 
-	this.field = properties.field;
-	this.error = properties.error;
-	this.threshold = properties.threshold;
+  this.field = properties.field;
+  this.error = properties.error;
+  this.threshold = properties.threshold;
 }
 
-MaxNumberRule.RULE_NAME = 'maxnumber';
+MaxNumberRule.RULE_NAME = "maxnumber";
 
 MaxNumberRule.prototype = {
+  /**
+   * Validates the form data according to the logic defined by the rule.
+   *
+   * @param {Object} formDataTree - FormDataTree object to validate.
+   * @param {Object} context - Optional context.
+   */
+  validate(formDataTree, context) {
+    const values = flatten(formDataTree.getAll(this.field));
 
-	/**
-	 * Validates the form data according to the logic defined by the rule.
-	 *
-	 * @param {Object} formDataTree - FormDataTree object to validate.
-	 * @param {Object} context - Optional context.
-	 */
-	validate( formDataTree, context ) {
-		const values = flatten( formDataTree.getAll( this.field ) );
+    if (!values.length) {
+      return true;
+    }
 
-		if ( ! values.length ) {
-			return true;
-		}
+    const threshold = parseFloat(this.threshold);
 
-		const threshold = parseFloat( this.threshold );
+    if (Number.isNaN(threshold)) {
+      return true;
+    }
 
-		if ( Number.isNaN( threshold ) ) {
-			return true;
-		}
+    for (const value of values) {
+      if (NumberRule.isNumber(value) && threshold < parseFloat(value)) {
+        throw new Invalidity(this, { cause: value });
+      }
+    }
 
-		for ( const value of values ) {
-			if ( NumberRule.isNumber( value ) && threshold < parseFloat( value ) ) {
-				throw new Invalidity( this, { cause: value } );
-			}
-		}
-
-		return true;
-	},
-
+    return true;
+  },
 };
 
-Object.setPrototypeOf( MaxNumberRule.prototype, AbstractRule.prototype );
+Object.setPrototypeOf(MaxNumberRule.prototype, AbstractRule.prototype);
