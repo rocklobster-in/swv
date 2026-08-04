@@ -1,43 +1,39 @@
-import { AbstractRule } from './abstract-rule';
+import { AbstractRule } from "./abstract-rule";
 
 export function CompositeRule() {
-	AbstractRule.call( this );
+  AbstractRule.call(this);
 
-	this.rules = [];
+  this.rules = [];
 }
 
-
 CompositeRule.prototype = {
+  addRule(rule) {
+    if (!(rule instanceof AbstractRule)) {
+      throw new TypeError("'rule' is not a rule object");
+    }
 
-	addRule( rule ) {
-		if ( ! ( rule instanceof AbstractRule ) ) {
-			throw new TypeError( "'rule' is not a rule object" );
-		}
+    this.rules.push(rule);
 
-		this.rules.push( rule );
+    return true;
+  },
 
-		return true;
-	},
+  toJSON() {
+    const properties = [];
 
-	toJSON() {
-		const properties = [];
+    Object.entries(this).forEach(([key, value]) => {
+      if ("rules" === key) {
+        properties.push([key, value.map((rule) => rule.toJSON())]);
+      } else {
+        properties.push([key, value]);
+      }
+    });
 
-		Object.entries( this ).forEach( ( [ key, value ] ) => {
-			if ( 'rules' === key ) {
-				properties.push( [ key, value.map( rule => rule.toJSON() ) ] );
-			} else {
-				properties.push( [ key, value ] );
-			}
-		} );
+    if (this.constructor.RULE_NAME) {
+      properties.unshift(["rule", this.constructor.RULE_NAME]);
+    }
 
-		if ( this.constructor.RULE_NAME ) {
-			properties.unshift( [ 'rule', this.constructor.RULE_NAME ] );
-		}
-
-		return Object.fromEntries( properties );
-	},
-
+    return Object.fromEntries(properties);
+  },
 };
 
-
-Object.setPrototypeOf( CompositeRule.prototype, AbstractRule.prototype );
+Object.setPrototypeOf(CompositeRule.prototype, AbstractRule.prototype);

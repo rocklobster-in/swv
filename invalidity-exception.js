@@ -1,25 +1,23 @@
-export function InvalidityException( rule, options = {} ) {
-	const { error } = rule;
+export function InvalidityException(rule, options = {}) {
+  const { error } = rule;
 
-	Error.call( this, error, options );
+  Error.call(this, error, options);
 
-	this.rule = rule;
+  this.rule = rule;
 }
 
 InvalidityException.prototype = {
+  get name() {
+    return "InvalidityException";
+  },
 
-	get name() {
-		return 'InvalidityException';
-	},
+  get message() {
+    return this.cause?.error ?? this.rule.error ?? "";
+  },
 
-	get message() {
-		return this.cause?.error ?? this.rule.error ?? '';
-	},
-
-	get field() {
-		return this.cause?.field ?? this.rule.field ?? '';
-	},
-
+  get field() {
+    return this.cause?.field ?? this.rule.field ?? "";
+  },
 };
 
-Object.setPrototypeOf( InvalidityException.prototype, Error.prototype );
+Object.setPrototypeOf(InvalidityException.prototype, Error.prototype);

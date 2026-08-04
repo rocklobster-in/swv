@@ -1,10 +1,11 @@
 {
   "name": "@rocklobsterinc/swv",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Schema-Woven Validation (SWV) is the next generation of web form validation mechanism.",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -17,7 +18,11 @@
   },
   "homepage": "https://github.com/rocklobster-in/swv#readme",
   "dependencies": {
-    "@rocklobsterinc/form-data-tree": "^2.1.0",
-    "@rocklobsterinc/functions": "^1.0.0"
+    "@rocklobsterinc/form-data-tree": "^2.1.1",
+    "@rocklobsterinc/functions": "^1.0.2"
+  },
+  "devDependencies": {
+    "mocha": "^11.7.6",
+    "prettier": "3.9.6"
   }
 }

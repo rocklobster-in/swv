@@ -1,45 +1,43 @@
-import FormDataTree from '@rocklobsterinc/form-data-tree';
+import FormDataTree from "@rocklobsterinc/form-data-tree";
 
-import { flatten } from '@rocklobsterinc/functions';
+import { flatten } from "@rocklobsterinc/functions";
 
-import { DateRule } from './date';
-import { AbstractRule } from '../abstract-rule';
-import { InvalidityException as Invalidity } from '../invalidity-exception';
+import { DateRule } from "./date";
+import { AbstractRule } from "../abstract-rule";
+import { InvalidityException as Invalidity } from "../invalidity-exception";
 
-export function MaxDateRule( properties ) {
-	AbstractRule.call( this );
+export function MaxDateRule(properties) {
+  AbstractRule.call(this);
 
-	this.field = properties.field;
-	this.error = properties.error;
-	this.threshold = properties.threshold;
+  this.field = properties.field;
+  this.error = properties.error;
+  this.threshold = properties.threshold;
 }
 
-MaxDateRule.RULE_NAME = 'maxdate';
+MaxDateRule.RULE_NAME = "maxdate";
 
 MaxDateRule.prototype = {
+  /**
+   * Validates the form data according to the logic defined by the rule.
+   *
+   * @param {Object} formDataTree - FormDataTree object to validate.
+   * @param {Object} context - Optional context.
+   */
+  validate(formDataTree, context) {
+    const values = flatten(formDataTree.getAll(this.field));
 
-	/**
-	 * Validates the form data according to the logic defined by the rule.
-	 *
-	 * @param {Object} formDataTree - FormDataTree object to validate.
-	 * @param {Object} context - Optional context.
-	 */
-	validate( formDataTree, context ) {
-		const values = flatten( formDataTree.getAll( this.field ) );
+    if (!values.length || !DateRule.isDate(this.threshold)) {
+      return true;
+    }
 
-		if ( ! values.length || ! DateRule.isDate( this.threshold ) ) {
-			return true;
-		}
+    for (const value of values) {
+      if (DateRule.isDate(value) && this.threshold < value) {
+        throw new Invalidity(this, { cause: value });
+      }
+    }
 
-		for ( const value of values ) {
-			if ( DateRule.isDate( value ) && this.threshold < value ) {
-				throw new Invalidity( this, { cause: value } );
-			}
-		}
-
-		return true;
-	},
-
+    return true;
+  },
 };
 
-Object.setPrototypeOf( MaxDateRule.prototype, AbstractRule.prototype );
+Object.setPrototypeOf(MaxDateRule.prototype, AbstractRule.prototype);
