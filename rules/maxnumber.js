@@ -2,9 +2,9 @@ import FormDataTree from "@rocklobsterinc/form-data-tree";
 
 import { flatten } from "@rocklobsterinc/functions";
 
-import { NumberRule } from "./number";
-import { AbstractRule } from "../abstract-rule";
-import { InvalidityException as Invalidity } from "../invalidity-exception";
+import { NumberRule } from "./number.js";
+import { AbstractRule } from "../abstract-rule.js";
+import { InvalidityException as Invalidity } from "../invalidity-exception.js";
 
 export function MaxNumberRule(properties) {
   AbstractRule.call(this);
