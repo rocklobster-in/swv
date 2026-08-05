@@ -1,4 +1,4 @@
-import { AbstractRule } from "./abstract-rule";
+import { AbstractRule } from "./abstract-rule.js";
 
 export function CompositeRule() {
   AbstractRule.call(this);

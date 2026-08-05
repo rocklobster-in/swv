@@ -1,7 +1,7 @@
 import FormDataTree from "@rocklobsterinc/form-data-tree";
 
-import { CompositeRule } from "../composite-rule";
-import { InvalidityException as Invalidity } from "../invalidity-exception";
+import { CompositeRule } from "../composite-rule.js";
+import { InvalidityException as Invalidity } from "../invalidity-exception.js";
 
 export function AllRule(properties) {
   CompositeRule.call(this);
