@@ -1,5 +1,4 @@
 import FormDataTree from "@rocklobsterinc/form-data-tree";
-
 import { flatten } from "@rocklobsterinc/functions";
 
 import { DateRule } from "./date.js";
