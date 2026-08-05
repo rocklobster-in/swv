@@ -2,9 +2,9 @@ import FormDataTree from "@rocklobsterinc/form-data-tree";
 
 import { flatten } from "@rocklobsterinc/functions";
 
-import { DateRule } from "./date";
-import { AbstractRule } from "../abstract-rule";
-import { InvalidityException as Invalidity } from "../invalidity-exception";
+import { DateRule } from "./date.js";
+import { AbstractRule } from "../abstract-rule.js";
+import { InvalidityException as Invalidity } from "../invalidity-exception.js";
 
 export function MinDateRule(properties) {
   AbstractRule.call(this);
