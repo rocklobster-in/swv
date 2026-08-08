@@ -1,6 +1,7 @@
 import FormDataTree from "@rocklobsterinc/form-data-tree";
 import { flatten } from "@rocklobsterinc/functions";
 
+import { NumberRule } from "./number.js";
 import { AbstractRule } from "../abstract-rule.js";
 import { InvalidityException as Invalidity } from "../invalidity-exception.js";
 
@@ -32,7 +33,7 @@ StepNumberRule.prototype = {
     const base = parseFloat(this.base);
     const interval = parseFloat(this.interval);
 
-    if (!(0 < interval)) {
+    if (Number.isNaN(base) || Number.isNaN(interval) || !(0 < interval)) {
       return true;
     }
 
@@ -50,7 +51,7 @@ StepNumberRule.prototype = {
     };
 
     for (const value of values) {
-      if (!matchesStep(value)) {
+      if (NumberRule.isNumber(value) && !matchesStep(value)) {
         throw new Invalidity(this, { cause: value });
       }
     }
