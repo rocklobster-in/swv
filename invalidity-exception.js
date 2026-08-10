@@ -1,8 +1,7 @@
 export function InvalidityException(rule, options = {}) {
-  const { error } = rule;
+  Error.call(this, rule.error ?? "");
 
-  Error.call(this, error, options);
-
+  this.cause = options.cause;
   this.rule = rule;
 }
 
@@ -12,11 +11,19 @@ InvalidityException.prototype = {
   },
 
   get message() {
-    return this.cause?.error ?? this.rule.error ?? "";
+    if (this.cause instanceof InvalidityException) {
+      return this.cause.message;
+    }
+
+    return this.rule.error ?? "";
   },
 
   get field() {
-    return this.cause?.field ?? this.rule.field ?? "";
+    if (this.cause instanceof InvalidityException) {
+      return this.cause.field;
+    }
+
+    return this.rule.field ?? "";
   },
 };
 
