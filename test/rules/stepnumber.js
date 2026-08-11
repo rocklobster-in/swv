@@ -7,13 +7,13 @@ const ruleName = "stepnumber";
 const ruleConstructor = rulesDictionary.get(ruleName);
 
 const valids = [
-  { value: "", base: 12, interval: 3 }, // blank
-  { value: "xxx", base: 12, interval: 3 }, // non-number
-  { value: "21", base: 12, interval: 3 }, // valid
+  { value: "", base: 1.3, interval: 3 }, // blank
+  { value: "xxx", base: 1.3, interval: 3 }, // non-number
+  { value: "10.3", base: 1.3, interval: 3 }, // valid
 ];
 
 const invalids = [
-  { value: "22", base: 12, interval: 3 }, // invalid
+  { value: "11.3", base: 1.3, interval: 3 }, // invalid
 ];
 
 describe(ruleConstructor.name, function () {
