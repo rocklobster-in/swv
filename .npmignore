@@ -1,1 +1,3 @@
 .editorconfig
+.prettier
+test/
