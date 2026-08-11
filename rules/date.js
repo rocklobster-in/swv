@@ -46,11 +46,18 @@ Object.setPrototypeOf(DateRule.prototype, AbstractRule.prototype);
  * @param {string} text - String to check.
  */
 DateRule.isDate = (text) => {
-  if (!/^[0-9]{4,}-[0-9]{2}-[0-9]{2}$/.test(text)) {
+  const result = /^(?<y>[0-9]{4,})-(?<m>[0-9]{2})-(?<d>[0-9]{2})$/.exec(text);
+
+  if (null === result) {
     return false;
   }
 
   const date = new Date(text);
 
-  return !Number.isNaN(date.valueOf());
+  return (
+    !Number.isNaN(date.valueOf()) &&
+    result.groups.y == date.getFullYear() &&
+    result.groups.m == date.getMonth() + 1 &&
+    result.groups.d == date.getDate()
+  );
 };

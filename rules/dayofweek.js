@@ -1,6 +1,7 @@
 import FormDataTree from "@rocklobsterinc/form-data-tree";
 import { flatten } from "@rocklobsterinc/functions";
 
+import { DateRule } from "./date.js";
 import { AbstractRule } from "../abstract-rule.js";
 import { InvalidityException as Invalidity } from "../invalidity-exception.js";
 
@@ -31,11 +32,13 @@ DayofweekRule.prototype = {
     const convertToIso8601 = (jsDow) => (0 === jsDow ? 7 : jsDow);
 
     for (const value of values) {
-      const date = new Date(value);
-      const day = convertToIso8601(date.getDay());
+      if (DateRule.isDate(value)) {
+        const date = new Date(value);
+        const day = convertToIso8601(date.getDay());
 
-      if (!this.accept?.map(String).includes(String(day))) {
-        throw new Invalidity(this, { cause: value });
+        if (!this.accept?.map(String).includes(String(day))) {
+          throw new Invalidity(this, { cause: value });
+        }
       }
     }
 
