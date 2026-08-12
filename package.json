@@ -18,11 +18,11 @@
   },
   "homepage": "https://github.com/rocklobster-in/swv#readme",
   "dependencies": {
-    "@rocklobsterinc/form-data-tree": "^2.1.1",
-    "@rocklobsterinc/functions": "^1.0.2"
+    "@rocklobsterinc/form-data-tree": "^2.0.0",
+    "@rocklobsterinc/functions": "^1.0.0"
   },
   "devDependencies": {
-    "mocha": "^11.7.6",
+    "mocha": "^11.0.0",
     "prettier": "3.9.6"
   }
 }
