@@ -52,12 +52,14 @@ DateRule.isDate = (text) => {
     return false;
   }
 
-  const date = new Date(text);
+  const date = new Date(
+    Date.UTC(result.groups.y, result.groups.m - 1, result.groups.d),
+  );
 
   return (
     !Number.isNaN(date.valueOf()) &&
-    result.groups.y == date.getFullYear() &&
-    result.groups.m == date.getMonth() + 1 &&
-    result.groups.d == date.getDate()
+    result.groups.y == date.getUTCFullYear() &&
+    result.groups.m == date.getUTCMonth() + 1 &&
+    result.groups.d == date.getUTCDate()
   );
 };
