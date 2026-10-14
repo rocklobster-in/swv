@@ -52,9 +52,7 @@ DateRule.isDate = (text) => {
     return false;
   }
 
-  const date = new Date(
-    Date.UTC(result.groups.y, result.groups.m - 1, result.groups.d),
-  );
+  const date = new Date(text);
 
   return (
     !Number.isNaN(date.valueOf()) &&

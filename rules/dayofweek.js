@@ -34,7 +34,7 @@ DayofweekRule.prototype = {
     for (const value of values) {
       if (DateRule.isDate(value)) {
         const date = new Date(value);
-        const day = convertToIso8601(date.getDay());
+        const day = convertToIso8601(date.getUTCDay());
 
         if (!this.accept?.map(String).includes(String(day))) {
           throw new Invalidity(this, { cause: value });
